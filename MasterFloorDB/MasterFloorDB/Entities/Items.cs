@@ -10,20 +10,15 @@ namespace MasterFloorDB.Entities
     {
         public int Id { get; set; }
 
-        public Collections CollectionType { get; set; }
+        public Types Type { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; }    
 
-        public int? Year { get; set; }
+        public string Director { get; set; }
 
-        public Conditions Condition{ get; set; }
+        public string Phone { get; set; }
 
-        public Rares Rare { get; set; }
+        public int? Rating { get; set; }
 
-        public string StoragePlace { get; set; }
-
-        public double? Price { get; set; }
-
-        public Status Status { get; set; }
     }
 }

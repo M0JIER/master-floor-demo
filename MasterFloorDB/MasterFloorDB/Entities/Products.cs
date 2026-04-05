@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace MasterFloorDB.Entities
 {
-    public class Collections
+    public class Products
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        //public static List<string> BaseName = new List<string>()
-        //{
-        //    "Cards",
-        //    "Moneys",
-        //    "Boxes"
-        //};
 
     }
 }

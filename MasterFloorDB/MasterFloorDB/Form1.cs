@@ -18,15 +18,17 @@ namespace MasterFloorDB
     {
         DBFuncs db = new DBFuncs();
 
-        List<Status> statuses;
+        List<Products> products;
         List<Conditions> conditions;
-        List<Rares> rares;
-        List<Collections> collections;
+        List<Materials> Materials;
+        List<Types> types;
 
         Control[] baseControls;
         Control[] CreateLine;
         Control[] EditLine;
         Control[] FilterView;
+
+
 
         int varId;
         enum UImode
@@ -39,10 +41,9 @@ namespace MasterFloorDB
         enum selectedTab
         {
             Items,
-            Collections,
-            Conditions,
-            Status,
-            Rares
+            Types,
+            Products,
+            Materials
         }
 
 
@@ -57,24 +58,60 @@ namespace MasterFloorDB
             startPresets();
 
         }
+
+        void createItem()
+        {
+            foreach (Items i in DBFuncs.GetAll())
+            {
+                ReqItem item = new ReqItem(i.Type, i.Name, i.Director, i.Phone, i.Rating.ToString());
+                item.Dock = DockStyle.Top;
+                item.passItem += receiveItem;
+
+                flowLayoutPanel1.Controls.Add(item);
+
+            }
+        }
+
+        private void receiveItem(object sender, Items item)
+        {
+            varId = item.Id;
+
+            txtName.Text = item.Name;
+            cmbType.SelectedIndex = cmbType.Items.IndexOf(item.Type);
+            txtDirector.Text = item.Director;
+            txtPhone.Text = item.Phone;
+            txtRating.Text = item.Rating.ToString();
+
+        }
+
+        void createItem(string data)
+        {
+            DataGridView dataview = new DataGridView();
+            dataview.DataSource = DBFuncs.GetData(data);
+            dataview.AutoSize = true;
+            //dataview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            //(dataview.Width, dataview.Height) = (flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+
+            flowLayoutPanel1.Controls.Add(dataview);
+        }
+
         void LoadData(selectedTab mode)
         {
+            flowLayoutPanel1.Controls.Clear();
             switch (mode)
             {
                 case selectedTab.Items:
-                    dataGridView1.DataSource = DBFuncs.GetAll();
+                    createItem();
                     break;
-                case selectedTab.Collections:
-                    dataGridView1.DataSource = DBFuncs.GetData("Collections");
+                case selectedTab.Types:
+                    createItem("Product_type");
+                    
                     break;
-                case selectedTab.Conditions:
-                    dataGridView1.DataSource = DBFuncs.GetData("Conditions");
+                case selectedTab.Products:
+                    createItem("Products");
                     break;
-                case selectedTab.Status:
-                    dataGridView1.DataSource = DBFuncs.GetData("Status");
-                    break;
-                case selectedTab.Rares:
-                    dataGridView1.DataSource = DBFuncs.GetData("Rares");
+                case selectedTab.Materials:
+                    createItem("Material_type");
                     break;
             }
         }
@@ -90,50 +127,26 @@ namespace MasterFloorDB
                 cb.SelectedIndex = 0;
             }
 
-            foreach (Control control in itemViewTab.Controls)
-            {
-                if (control.Tag != null)
-                    if (control.Tag.ToString().Contains("CreateLine") || control.Tag.ToString().Contains("base"))
-                    {
-                        control.Visible = true;
-                    }
-                    else { control.Visible = false; }
-            }
+            //foreach (Control control in itemViewTab.Controls)
+            //{
+            //    if (control.Tag != null)
+            //        if (control.Tag.ToString().Contains("CreateLine") || control.Tag.ToString().Contains("base"))
+            //        {
+            //            control.Visible = true;
+            //        }
+            //        else { control.Visible = false; }
+            //}
         }
 
         void updCmb()
         {
             List<string> holder = new List<string>();
-            foreach (Collections c in collections)
+            foreach (Types c in types)
             {
                 holder.Add(c.Name);
             }
-            cmbCollection.DataSource = holder;
+            cmbType.DataSource = holder;
             //holder.Clear();
-
-            List<string> holder1 = new List<string>();
-            foreach (Conditions c in conditions)
-            {
-                holder1.Add(c.Name);
-            }
-            cmbCondition.DataSource = holder1;
-            //holder1.Clear();
-
-            List<string> holder2 = new List<string>();
-            foreach (Rares r in rares)
-            {
-                holder2.Add(r.Name);
-            }
-            cmbRare.DataSource = holder2;
-            //holder2.Clear();
-
-            List<string> holder3 = new List<string>();
-            foreach (Status s in statuses)
-            {
-                holder3.Add(s.Name);
-            }
-            cmbStatus.DataSource = holder3;
-
         }
 
         private void updLists()
@@ -151,10 +164,10 @@ namespace MasterFloorDB
                 funcsCmbStatus,
                 funcsCmbRare
             };
-            statuses = DBFuncs.GetStatusList();
-            collections = DBFuncs.GetCollsList();
-            conditions = DBFuncs.GetConditionsList();
-            rares = DBFuncs.GetRaresList();
+            products = DBFuncs.GetProductsList();
+            types = DBFuncs.GetTypesList();
+            //conditions = DBFuncs.GetConditionsList();
+            Materials = DBFuncs.GetMaterialsList();
             updCmb();
         }
 
@@ -179,20 +192,14 @@ namespace MasterFloorDB
                 ,funcsCmbRare
 
                 //Общие
-                ,txtValue
-                ,labelValue
-                ,cmbStatus
-                ,labelStatus
-                ,txtPlace
-                ,labelMainPlace
-                ,cmbRare
-                ,cmbCondition
-                ,labelMainRare
-                ,labelMainCond
-                ,txtYear
-                ,labelMainYear
-                ,cmbCollection
-                ,labelMainColl
+                ,txtRating
+                ,labelRating
+                ,txtPhone
+                ,labelMainPhone
+                ,txtDirector
+                ,labelMainDirector
+                ,cmbType
+                ,labelMainType
                 ,btnAddMain
                 ,txtName
                 ,labelMainName
@@ -239,20 +246,14 @@ namespace MasterFloorDB
 
 
                 //Общие
-                ,txtValue
-                ,labelValue
-                ,cmbStatus
-                ,labelStatus
-                ,txtPlace
-                ,labelMainPlace
-                ,cmbRare
-                ,cmbCondition
-                ,labelMainRare
-                ,labelMainCond
-                ,txtYear
-                ,labelMainYear
-                ,cmbCollection
-                ,labelMainColl
+                ,txtRating
+                ,labelRating
+                ,txtPhone
+                ,labelMainPhone
+                ,txtDirector
+                ,labelMainDirector
+                ,cmbType
+                ,labelMainType
                 ,delBtn
                 ,editBtn
                 ,txtName
@@ -345,9 +346,9 @@ namespace MasterFloorDB
 
         private bool isUnique(object table, string subj)
         {
-            if (table is List<Collections>)
+            if (table is List<Types>)
             {
-                foreach (Collections s in collections)
+                foreach (Types s in types)
                 {
                     if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
                 }
@@ -361,24 +362,24 @@ namespace MasterFloorDB
                 }
             }
 
-            if (table is List<Rares>)
+            if (table is List<Materials>)
             {
-                foreach (Rares s in rares)
+                foreach (Materials s in Materials)
                 {
                     if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
                 }
             }
 
-            if (table is List<Status>)
+            if (table is List<Products>)
             {
-                foreach (Status s in statuses)
+                foreach (Products s in products)
                 {
                     if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
                 }
             }
 
             return true;
-            //if (table.GetType() == typeof(Collections))
+            //if (table.GetType() == typeof(Types))
         }
 
 
@@ -406,36 +407,43 @@ namespace MasterFloorDB
         }
 
 
-        private void txtYear_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
+
         }
+
 
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 0)
             {
-                dataGridView1.DataSource = DBFuncs.GetAll();
+                LoadData(selectedTab.Items);
+                //dataGridView1.DataSource = DBFuncs.GetAll();
             }
             else if (tabControl1.SelectedIndex == 1)
             {
-                dataGridView1.DataSource = DBFuncs.GetData("Collections");
+                //dataGridView1.DataSource = DBFuncs.GetData("Types");
+                LoadData(selectedTab.Types);
             }
             else if (tabControl1.SelectedIndex == 2)
             {
-                dataGridView1.DataSource = DBFuncs.GetData("Conditions");
+                //dataGridView1.DataSource = DBFuncs.GetData("Conditions");
+                LoadData(selectedTab.Materials);
             }
             else if (tabControl1.SelectedIndex == 3)
             {
-                dataGridView1.DataSource = DBFuncs.GetData("Status");
+                //dataGridView1.DataSource = DBFuncs.GetData("Status");
+                LoadData(selectedTab.Products);
             }
             else if (tabControl1.SelectedIndex == 4)
             {
-                dataGridView1.DataSource = DBFuncs.GetData("Rares");
+                //dataGridView1.DataSource = DBFuncs.GetData("Materials");
+                LoadData(selectedTab.Materials);
             }
         }
 
@@ -443,38 +451,35 @@ namespace MasterFloorDB
         {
             Items item = new Items();
 
-            item.CollectionType = collections.FirstOrDefault(c => c.Name == cmbCollection.Text);
             item.Name = txtName.Text;
-            if (txtYear.Text == null|| txtYear.Text == "") item.Year = null; else item.Year = int.Parse(txtYear.Text);
-            item.Condition = conditions.FirstOrDefault(con => con.Name == cmbCondition.Text);
-            item.Rare = rares.FirstOrDefault(rare => rare.Name == cmbRare.Text);
-            item.StoragePlace = txtPlace.Text;
-            if (txtValue.Text == null || txtValue.Text == "") item.Price = null; else item.Price = Convert.ToDouble(txtValue.Text);
-            item.Status = statuses.FirstOrDefault(stat => stat.Name == cmbStatus.Text);
+            if (cmbType.Text == "") { MessageBox.Show("Выберите тип"); return; } item.Type = types.FirstOrDefault(type => type.Name == cmbType.Text);
+            item.Director = txtDirector.Text;
+            item.Phone = txtPhone.Text;
+            if (txtRating.Text == "") item.Rating = null; item.Rating = int.Parse(txtRating.Text);
+
+            //if (txtYear.Text == null || txtYear.Text == "") item.Year = null; else item.Year = int.Parse(txtYear.Text);
+            //item.StoragePlace = txtPlace.Text;
+            //if (txtValue.Text == null || txtValue.Text == "") item.Price = null; else item.Price = Convert.ToDouble(txtValue.Text);
+            //item.Status = statuses.FirstOrDefault(stat => stat.Name == cmbStatus.Text);
 
             if (DBFuncs.Add(item))
-            updLists();
+                updLists();
             LoadData(selectedTab.Items);
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            int? year;
-            int? value;
-            if (int.TryParse(txtYear.Text, out int i)) { year = i; } else year = null;
-            if(int.TryParse(txtValue.Text, out int f)) { value = f; } else value = null;
+            int? rating;
+            if(int.TryParse(txtRating.Text, out int f)) { rating = f; } else rating = null;
             if (DBFuncs.UpdateItemsData
-                 ("Items",
+                 ("Partners",
                  varId,
                  txtName.Text,
-                 collections.FirstOrDefault(c => c.Name == cmbCollection.Text).Id,
-                 year,
-                 conditions.FirstOrDefault(con => con.Name == cmbCondition.Text).Id,
-                 rares.FirstOrDefault(c => c.Name == cmbRare.Text).Id,
-                 txtPlace.Text,
-                 statuses.FirstOrDefault(c => c.Name == cmbStatus.Text).Id,
-                 value))
-            updLists();
+                 types.FirstOrDefault(c => c.Name == cmbType.Text).Id,
+                 txtDirector.Text,
+                 txtPhone.Text,
+                 rating))
+                updLists();
             LoadData(selectedTab.Items);
         }
 
@@ -485,78 +490,49 @@ namespace MasterFloorDB
             int curCol = e.ColumnIndex;
             if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 0)
             {
-                int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
-                varId = curId;
-                string curName = dataGridView1[1, curRow].Value.ToString();
-                
-                //int curCollId = collections.FirstOrDefault(c => c.Name == dataGridView1[2, curRow].Value.ToString()).Id;
-                //collId = curCollId;
-                string curColl = dataGridView1[2, curRow].Value.ToString();
-
-                int curYear = int.Parse(dataGridView1[3, curRow].Value.ToString());
-
-                string curCond = dataGridView1[4, curRow].Value.ToString();
-
-                string curRare = dataGridView1[5, curRow].Value.ToString();
-                
-                string curPlace = dataGridView1[6, curRow].Value.ToString();
-
-                string curStatus = dataGridView1[7, curRow].Value.ToString();
-
-                string curValue = dataGridView1[8, curRow].Value.ToString();
-
-
-                txtName.Text = curName;
-                cmbCollection.SelectedIndex = cmbCollection.Items.IndexOf(curColl);
-                txtYear.Text = curYear.ToString();
-                cmbCondition.SelectedIndex = cmbCondition.Items.IndexOf(curCond);
-                cmbRare.SelectedIndex = cmbRare.Items.IndexOf(curRare);
-                txtPlace.Text = curPlace.ToString();
-                cmbStatus.SelectedIndex = cmbStatus.Items.IndexOf(curStatus);
-                txtValue.Text = curValue;
             }
 
-            if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex ==  1)
-            //else if (curCol >= 0 && curRow >= 0)
-            {
-                int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
-                varId = curId;
-                
-                string curName = dataGridView1[1, curRow].Value.ToString();
+            //if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex ==  1)
+            ////else if (curCol >= 0 && curRow >= 0)
+            //{
+            //    int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
+            //    varId = curId;
 
-                txtCollsName.Text = curName;
-            }
+            //    string curName = dataGridView1[1, curRow].Value.ToString();
 
-            if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 2)
-            //else if (curCol >= 0 && curRow >= 0)
-            {
-                int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
-                varId = curId;
+            //    txtCollsName.Text = curName;
+            //}
 
-                string curName = dataGridView1[1, curRow].Value.ToString();
+            //if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 2)
+            ////else if (curCol >= 0 && curRow >= 0)
+            //{
+            //    int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
+            //    varId = curId;
 
-                txtCondName.Text = curName;
-            }
-            if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 3)
-            //else if (curCol >= 0 && curRow >= 0)
-            {
-                int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
-                varId = curId;
+            //    string curName = dataGridView1[1, curRow].Value.ToString();
 
-                string curName = dataGridView1[1, curRow].Value.ToString();
+            //    txtCondName.Text = curName;
+            //}
+            //if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 3)
+            ////else if (curCol >= 0 && curRow >= 0)
+            //{
+            //    int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
+            //    varId = curId;
 
-                txtStatusName.Text = curName;
-            }
-            if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 4)
-            //else if (curCol >= 0 && curRow >= 0)
-            {
-                int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
-                varId = curId;
+            //    string curName = dataGridView1[1, curRow].Value.ToString();
 
-                string curName = dataGridView1[1, curRow].Value.ToString();
+            //    txtStatusName.Text = curName;
+            //}
+            //if (curCol >= 0 && curRow >= 0 && tabControl1.SelectedIndex == 4)
+            ////else if (curCol >= 0 && curRow >= 0)
+            //{
+            //    int curId = int.Parse(dataGridView1[0, curRow].Value.ToString());
+            //    varId = curId;
 
-                txtRareName.Text = curName;
-            }
+            //    string curName = dataGridView1[1, curRow].Value.ToString();
+
+            //    txtRareName.Text = curName;
+            //}
 
         }
 
@@ -569,24 +545,24 @@ namespace MasterFloorDB
 
         private void btnAddColls_Click(object sender, EventArgs e)
         {
-            if (isUnique(collections, txtCollsName.Text))
-            if (DBFuncs.AddDataInBase("Collections", txtCollsName.Text))
+            if (isUnique(types, txtCollsName.Text))
+            if (DBFuncs.AddDataInBase("Types", txtCollsName.Text))
             updLists();
-            LoadData(selectedTab.Collections);
+            LoadData(selectedTab.Types);
         }
 
         private void btnEditColls_Click(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Collections", txtCollsName.Text, varId))
+            if (DBFuncs.UpdateData("Types", txtCollsName.Text, varId))
             updLists();
-            LoadData(selectedTab.Collections);
+            LoadData(selectedTab.Types);
         }
 
         private void btnDelColls_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Collections", varId);
+            DBFuncs.DeleteData("Types", varId);
             updLists();
-            LoadData(selectedTab.Collections);
+            LoadData(selectedTab.Types);
         }
 
         private void btnAddCond_Click(object sender, EventArgs e)
@@ -594,65 +570,66 @@ namespace MasterFloorDB
             if (isUnique(conditions, txtCondName.Text))
             if (DBFuncs.AddDataInBase("Conditions", txtCondName.Text))
             updLists();
-            LoadData(selectedTab.Conditions);
+            //LoadData(selectedTab.Conditions);
         }
 
         private void btnEditCond_Click(object sender, EventArgs e)
         {
             if (DBFuncs.UpdateData("Conditions", txtCondName.Text, varId))
             updLists();
-            LoadData(selectedTab.Conditions);
+            //LoadData(selectedTab.Conditions);
         }
 
         private void btnDelCond_Click(object sender, EventArgs e)
         {
             DBFuncs.DeleteData("Conditions", varId);
             updLists();
-            LoadData(selectedTab.Conditions);
+            //LoadData(selectedTab.Conditions);
         }
 
         private void btnAddStatus_Click(object sender, EventArgs e)
         {
-            if (isUnique(statuses, txtStatusName.Text))
+            if (isUnique(products, txtStatusName.Text))
             if (DBFuncs.AddDataInBase("Status", txtStatusName.Text))
             updLists();
-            LoadData(selectedTab.Status);
+            LoadData(selectedTab.Products);
         }
 
         private void btnEditStatus_Click(object sender, EventArgs e)
         {
             if (DBFuncs.UpdateData("Status", txtStatusName.Text,varId))
             updLists();
-            LoadData(selectedTab.Status);
+            LoadData(selectedTab.Products);
         }
 
         private void btnDelStatus_Click(object sender, EventArgs e)
         {
             DBFuncs.DeleteData("Status", varId);
             updLists();
-            LoadData(selectedTab.Status);
+            LoadData(selectedTab.Products);
         }
 
         private void btnAddRare_Click(object sender, EventArgs e)
         {
-            if(isUnique(rares, txtRareName.Text))
-            if (DBFuncs.AddDataInBase("Rares", txtRareName.Text))
+            if(isUnique(Materials, txtRareName.Text))
+            if (DBFuncs.AddDataInBase("Materials", txtRareName.Text))
             updLists();
-            LoadData(selectedTab.Rares);
+            LoadData(selectedTab.Materials);
         }
 
         private void btnEditRare_Click(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Rares", txtRareName.Text, varId))
+            if (DBFuncs.UpdateData("Materials", txtRareName.Text, varId))
             updLists();
-            LoadData(selectedTab.Rares);
+            LoadData(selectedTab.Materials);
         }
 
         private void btnDelRare_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Rares", varId);
+            DBFuncs.DeleteData("Materials", varId);
             updLists();
-            LoadData(selectedTab.Rares);
+            LoadData(selectedTab.Materials);
         }
+
     }
 }
