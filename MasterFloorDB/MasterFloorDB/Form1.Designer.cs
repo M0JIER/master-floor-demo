@@ -1,4 +1,6 @@
-﻿namespace MasterFloorDB
+﻿using System.Windows.Forms;
+
+namespace MasterFloorDB
 {
     partial class Form1
     {
@@ -28,32 +30,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.itemViewTab = new System.Windows.Forms.TabPage();
             this.delBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
-            this.txtValue = new System.Windows.Forms.TextBox();
-            this.labelValue = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.labelStatus = new System.Windows.Forms.Label();
-            this.txtPlace = new System.Windows.Forms.TextBox();
-            this.labelMainPlace = new System.Windows.Forms.Label();
-            this.cmbRare = new System.Windows.Forms.ComboBox();
-            this.cmbCondition = new System.Windows.Forms.ComboBox();
-            this.labelMainRare = new System.Windows.Forms.Label();
-            this.labelMainCond = new System.Windows.Forms.Label();
-            this.txtYear = new System.Windows.Forms.TextBox();
-            this.labelMainYear = new System.Windows.Forms.Label();
-            this.cmbCollection = new System.Windows.Forms.ComboBox();
-            this.labelMainColl = new System.Windows.Forms.Label();
+            this.txtRating = new System.Windows.Forms.TextBox();
+            this.labelRating = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.labelMainPhone = new System.Windows.Forms.Label();
+            this.txtDirector = new System.Windows.Forms.TextBox();
+            this.labelMainDirector = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.labelMainType = new System.Windows.Forms.Label();
             this.btnAddMain = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.labelMainName = new System.Windows.Forms.Label();
             this.funcsCmbMain = new System.Windows.Forms.ComboBox();
             this.funcsLabelMain = new System.Windows.Forms.Label();
-            this.collsTab = new System.Windows.Forms.TabPage();
+            this.typesTab = new System.Windows.Forms.TabPage();
             this.btnDelColls = new System.Windows.Forms.Button();
             this.btnEditColls = new System.Windows.Forms.Button();
             this.btnAddColls = new System.Windows.Forms.Button();
@@ -61,7 +55,7 @@
             this.labelCollsName = new System.Windows.Forms.Label();
             this.funcsCmbColls = new System.Windows.Forms.ComboBox();
             this.funcsLabelColls = new System.Windows.Forms.Label();
-            this.condTab = new System.Windows.Forms.TabPage();
+            this.materialsTab = new System.Windows.Forms.TabPage();
             this.btnDelCond = new System.Windows.Forms.Button();
             this.btnEditCond = new System.Windows.Forms.Button();
             this.btnAddCond = new System.Windows.Forms.Button();
@@ -69,7 +63,7 @@
             this.labelCondName = new System.Windows.Forms.Label();
             this.funcsCmbCond = new System.Windows.Forms.ComboBox();
             this.funcsLabelCond = new System.Windows.Forms.Label();
-            this.statusTab = new System.Windows.Forms.TabPage();
+            this.productsTab = new System.Windows.Forms.TabPage();
             this.btnDelStatus = new System.Windows.Forms.Button();
             this.btnEditStatus = new System.Windows.Forms.Button();
             this.btnAddStatus = new System.Windows.Forms.Button();
@@ -85,54 +79,23 @@
             this.labelRareName = new System.Windows.Forms.Label();
             this.funcsCmbRare = new System.Windows.Forms.ComboBox();
             this.funcsLabelRare = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.itemViewTab.SuspendLayout();
-            this.collsTab.SuspendLayout();
-            this.condTab.SuspendLayout();
-            this.statusTab.SuspendLayout();
+            this.typesTab.SuspendLayout();
+            this.materialsTab.SuspendLayout();
+            this.productsTab.SuspendLayout();
             this.raresTab.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.47488F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.52512F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1095, 574);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(699, 568);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.itemViewTab);
-            this.tabControl1.Controls.Add(this.collsTab);
-            this.tabControl1.Controls.Add(this.condTab);
-            this.tabControl1.Controls.Add(this.statusTab);
+            this.tabControl1.Controls.Add(this.typesTab);
+            this.tabControl1.Controls.Add(this.materialsTab);
+            this.tabControl1.Controls.Add(this.productsTab);
             this.tabControl1.Controls.Add(this.raresTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(708, 3);
@@ -146,20 +109,14 @@
             // 
             this.itemViewTab.Controls.Add(this.delBtn);
             this.itemViewTab.Controls.Add(this.editBtn);
-            this.itemViewTab.Controls.Add(this.txtValue);
-            this.itemViewTab.Controls.Add(this.labelValue);
-            this.itemViewTab.Controls.Add(this.cmbStatus);
-            this.itemViewTab.Controls.Add(this.labelStatus);
-            this.itemViewTab.Controls.Add(this.txtPlace);
-            this.itemViewTab.Controls.Add(this.labelMainPlace);
-            this.itemViewTab.Controls.Add(this.cmbRare);
-            this.itemViewTab.Controls.Add(this.cmbCondition);
-            this.itemViewTab.Controls.Add(this.labelMainRare);
-            this.itemViewTab.Controls.Add(this.labelMainCond);
-            this.itemViewTab.Controls.Add(this.txtYear);
-            this.itemViewTab.Controls.Add(this.labelMainYear);
-            this.itemViewTab.Controls.Add(this.cmbCollection);
-            this.itemViewTab.Controls.Add(this.labelMainColl);
+            this.itemViewTab.Controls.Add(this.txtRating);
+            this.itemViewTab.Controls.Add(this.labelRating);
+            this.itemViewTab.Controls.Add(this.txtPhone);
+            this.itemViewTab.Controls.Add(this.labelMainPhone);
+            this.itemViewTab.Controls.Add(this.txtDirector);
+            this.itemViewTab.Controls.Add(this.labelMainDirector);
+            this.itemViewTab.Controls.Add(this.cmbType);
+            this.itemViewTab.Controls.Add(this.labelMainType);
             this.itemViewTab.Controls.Add(this.btnAddMain);
             this.itemViewTab.Controls.Add(this.txtName);
             this.itemViewTab.Controls.Add(this.labelMainName);
@@ -195,141 +152,81 @@
             this.editBtn.UseVisualStyleBackColor = true;
             this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
-            // txtValue
+            // txtRating
             // 
-            this.txtValue.Location = new System.Drawing.Point(107, 272);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(240, 20);
-            this.txtValue.TabIndex = 62;
-            this.txtValue.Tag = "CreateLine, EditLine";
-            this.txtValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.txtRating.Location = new System.Drawing.Point(93, 189);
+            this.txtRating.Name = "txtRating";
+            this.txtRating.Size = new System.Drawing.Size(253, 20);
+            this.txtRating.TabIndex = 62;
+            this.txtRating.Tag = "CreateLine, EditLine";
+            this.txtRating.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
-            // labelValue
+            // labelRating
             // 
-            this.labelValue.AutoSize = true;
-            this.labelValue.Location = new System.Drawing.Point(36, 275);
-            this.labelValue.Name = "labelValue";
-            this.labelValue.Size = new System.Drawing.Size(65, 13);
-            this.labelValue.TabIndex = 61;
-            this.labelValue.Tag = "CreateLine, EditLine";
-            this.labelValue.Text = "Стоимость:";
+            this.labelRating.AutoSize = true;
+            this.labelRating.Location = new System.Drawing.Point(36, 192);
+            this.labelRating.Name = "labelRating";
+            this.labelRating.Size = new System.Drawing.Size(51, 13);
+            this.labelRating.TabIndex = 61;
+            this.labelRating.Tag = "CreateLine, EditLine";
+            this.labelRating.Text = "Рейтинг:";
             // 
-            // cmbStatus
+            // txtPhone
             // 
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(86, 240);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(260, 21);
-            this.cmbStatus.TabIndex = 60;
-            this.cmbStatus.Tag = "CreateLine, EditLine";
+            this.txtPhone.Location = new System.Drawing.Point(97, 159);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(250, 20);
+            this.txtPhone.TabIndex = 58;
+            this.txtPhone.Tag = "CreateLine, EditLine";
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
-            // labelStatus
+            // labelMainPhone
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(36, 243);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(44, 13);
-            this.labelStatus.TabIndex = 59;
-            this.labelStatus.Tag = "CreateLine, EditLine";
-            this.labelStatus.Text = "Статус:";
+            this.labelMainPhone.AutoSize = true;
+            this.labelMainPhone.Location = new System.Drawing.Point(36, 162);
+            this.labelMainPhone.Name = "labelMainPhone";
+            this.labelMainPhone.Size = new System.Drawing.Size(55, 13);
+            this.labelMainPhone.TabIndex = 57;
+            this.labelMainPhone.Tag = "CreateLine, EditLine";
+            this.labelMainPhone.Text = "Телефон:";
             // 
-            // txtPlace
+            // txtDirector
             // 
-            this.txtPlace.Location = new System.Drawing.Point(134, 212);
-            this.txtPlace.Name = "txtPlace";
-            this.txtPlace.Size = new System.Drawing.Size(213, 20);
-            this.txtPlace.TabIndex = 58;
-            this.txtPlace.Tag = "CreateLine, EditLine";
+            this.txtDirector.Location = new System.Drawing.Point(102, 128);
+            this.txtDirector.Name = "txtDirector";
+            this.txtDirector.Size = new System.Drawing.Size(245, 20);
+            this.txtDirector.TabIndex = 51;
+            this.txtDirector.Tag = "CreateLine, EditLine";
             // 
-            // labelMainPlace
+            // labelMainDirector
             // 
-            this.labelMainPlace.AutoSize = true;
-            this.labelMainPlace.Location = new System.Drawing.Point(36, 215);
-            this.labelMainPlace.Name = "labelMainPlace";
-            this.labelMainPlace.Size = new System.Drawing.Size(92, 13);
-            this.labelMainPlace.TabIndex = 57;
-            this.labelMainPlace.Tag = "CreateLine, EditLine";
-            this.labelMainPlace.Text = "Место хранения:";
+            this.labelMainDirector.AutoSize = true;
+            this.labelMainDirector.Location = new System.Drawing.Point(36, 131);
+            this.labelMainDirector.Name = "labelMainDirector";
+            this.labelMainDirector.Size = new System.Drawing.Size(60, 13);
+            this.labelMainDirector.TabIndex = 50;
+            this.labelMainDirector.Tag = "CreateLine, EditLine";
+            this.labelMainDirector.Text = "Директор:";
             // 
-            // cmbRare
+            // cmbType
             // 
-            this.cmbRare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRare.FormattingEnabled = true;
-            this.cmbRare.Location = new System.Drawing.Point(100, 182);
-            this.cmbRare.Name = "cmbRare";
-            this.cmbRare.Size = new System.Drawing.Size(246, 21);
-            this.cmbRare.TabIndex = 56;
-            this.cmbRare.Tag = "CreateLine, EditLine";
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(70, 69);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(276, 21);
+            this.cmbType.TabIndex = 49;
+            this.cmbType.Tag = "CreateLine, EditLine";
             // 
-            // cmbCondition
+            // labelMainType
             // 
-            this.cmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCondition.FormattingEnabled = true;
-            this.cmbCondition.Location = new System.Drawing.Point(106, 154);
-            this.cmbCondition.Name = "cmbCondition";
-            this.cmbCondition.Size = new System.Drawing.Size(241, 21);
-            this.cmbCondition.TabIndex = 55;
-            this.cmbCondition.Tag = "CreateLine, EditLine";
-            // 
-            // labelMainRare
-            // 
-            this.labelMainRare.AutoSize = true;
-            this.labelMainRare.Location = new System.Drawing.Point(36, 185);
-            this.labelMainRare.Name = "labelMainRare";
-            this.labelMainRare.Size = new System.Drawing.Size(58, 13);
-            this.labelMainRare.TabIndex = 54;
-            this.labelMainRare.Tag = "CreateLine, EditLine";
-            this.labelMainRare.Text = "Редкость:";
-            // 
-            // labelMainCond
-            // 
-            this.labelMainCond.AutoSize = true;
-            this.labelMainCond.Location = new System.Drawing.Point(36, 157);
-            this.labelMainCond.Name = "labelMainCond";
-            this.labelMainCond.Size = new System.Drawing.Size(64, 13);
-            this.labelMainCond.TabIndex = 52;
-            this.labelMainCond.Tag = "CreateLine, EditLine";
-            this.labelMainCond.Text = "Состояние:";
-            // 
-            // txtYear
-            // 
-            this.txtYear.Location = new System.Drawing.Point(70, 128);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(277, 20);
-            this.txtYear.TabIndex = 51;
-            this.txtYear.Tag = "CreateLine, EditLine";
-            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYear_KeyPress);
-            // 
-            // labelMainYear
-            // 
-            this.labelMainYear.AutoSize = true;
-            this.labelMainYear.Location = new System.Drawing.Point(36, 131);
-            this.labelMainYear.Name = "labelMainYear";
-            this.labelMainYear.Size = new System.Drawing.Size(28, 13);
-            this.labelMainYear.TabIndex = 50;
-            this.labelMainYear.Tag = "CreateLine, EditLine";
-            this.labelMainYear.Text = "Год:";
-            // 
-            // cmbCollection
-            // 
-            this.cmbCollection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCollection.FormattingEnabled = true;
-            this.cmbCollection.Location = new System.Drawing.Point(107, 99);
-            this.cmbCollection.Name = "cmbCollection";
-            this.cmbCollection.Size = new System.Drawing.Size(239, 21);
-            this.cmbCollection.TabIndex = 49;
-            this.cmbCollection.Tag = "CreateLine, EditLine";
-            // 
-            // labelMainColl
-            // 
-            this.labelMainColl.AutoSize = true;
-            this.labelMainColl.Location = new System.Drawing.Point(36, 102);
-            this.labelMainColl.Name = "labelMainColl";
-            this.labelMainColl.Size = new System.Drawing.Size(65, 13);
-            this.labelMainColl.TabIndex = 48;
-            this.labelMainColl.Tag = "CreateLine, EditLine";
-            this.labelMainColl.Text = "Коллекция:";
+            this.labelMainType.AutoSize = true;
+            this.labelMainType.Location = new System.Drawing.Point(36, 72);
+            this.labelMainType.Name = "labelMainType";
+            this.labelMainType.Size = new System.Drawing.Size(29, 13);
+            this.labelMainType.TabIndex = 48;
+            this.labelMainType.Tag = "CreateLine, EditLine";
+            this.labelMainType.Text = "Тип:";
             // 
             // btnAddMain
             // 
@@ -344,7 +241,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(102, 71);
+            this.txtName.Location = new System.Drawing.Point(102, 99);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(245, 20);
             this.txtName.TabIndex = 46;
@@ -353,7 +250,7 @@
             // labelMainName
             // 
             this.labelMainName.AutoSize = true;
-            this.labelMainName.Location = new System.Drawing.Point(36, 74);
+            this.labelMainName.Location = new System.Drawing.Point(36, 102);
             this.labelMainName.Name = "labelMainName";
             this.labelMainName.Size = new System.Drawing.Size(60, 13);
             this.labelMainName.TabIndex = 45;
@@ -385,22 +282,22 @@
             this.funcsLabelMain.Tag = "base";
             this.funcsLabelMain.Text = "Функции:";
             // 
-            // collsTab
+            // typesTab
             // 
-            this.collsTab.Controls.Add(this.btnDelColls);
-            this.collsTab.Controls.Add(this.btnEditColls);
-            this.collsTab.Controls.Add(this.btnAddColls);
-            this.collsTab.Controls.Add(this.txtCollsName);
-            this.collsTab.Controls.Add(this.labelCollsName);
-            this.collsTab.Controls.Add(this.funcsCmbColls);
-            this.collsTab.Controls.Add(this.funcsLabelColls);
-            this.collsTab.Location = new System.Drawing.Point(4, 22);
-            this.collsTab.Name = "collsTab";
-            this.collsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.collsTab.Size = new System.Drawing.Size(376, 542);
-            this.collsTab.TabIndex = 1;
-            this.collsTab.Text = "Коллекции";
-            this.collsTab.UseVisualStyleBackColor = true;
+            this.typesTab.Controls.Add(this.btnDelColls);
+            this.typesTab.Controls.Add(this.btnEditColls);
+            this.typesTab.Controls.Add(this.btnAddColls);
+            this.typesTab.Controls.Add(this.txtCollsName);
+            this.typesTab.Controls.Add(this.labelCollsName);
+            this.typesTab.Controls.Add(this.funcsCmbColls);
+            this.typesTab.Controls.Add(this.funcsLabelColls);
+            this.typesTab.Location = new System.Drawing.Point(4, 22);
+            this.typesTab.Name = "typesTab";
+            this.typesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.typesTab.Size = new System.Drawing.Size(376, 542);
+            this.typesTab.TabIndex = 1;
+            this.typesTab.Text = "Типы";
+            this.typesTab.UseVisualStyleBackColor = true;
             // 
             // btnDelColls
             // 
@@ -478,21 +375,21 @@
             this.funcsLabelColls.Tag = "base";
             this.funcsLabelColls.Text = "Функции:";
             // 
-            // condTab
+            // materialsTab
             // 
-            this.condTab.Controls.Add(this.btnDelCond);
-            this.condTab.Controls.Add(this.btnEditCond);
-            this.condTab.Controls.Add(this.btnAddCond);
-            this.condTab.Controls.Add(this.txtCondName);
-            this.condTab.Controls.Add(this.labelCondName);
-            this.condTab.Controls.Add(this.funcsCmbCond);
-            this.condTab.Controls.Add(this.funcsLabelCond);
-            this.condTab.Location = new System.Drawing.Point(4, 22);
-            this.condTab.Name = "condTab";
-            this.condTab.Size = new System.Drawing.Size(376, 542);
-            this.condTab.TabIndex = 2;
-            this.condTab.Text = "Состояния";
-            this.condTab.UseVisualStyleBackColor = true;
+            this.materialsTab.Controls.Add(this.btnDelCond);
+            this.materialsTab.Controls.Add(this.btnEditCond);
+            this.materialsTab.Controls.Add(this.btnAddCond);
+            this.materialsTab.Controls.Add(this.txtCondName);
+            this.materialsTab.Controls.Add(this.labelCondName);
+            this.materialsTab.Controls.Add(this.funcsCmbCond);
+            this.materialsTab.Controls.Add(this.funcsLabelCond);
+            this.materialsTab.Location = new System.Drawing.Point(4, 22);
+            this.materialsTab.Name = "materialsTab";
+            this.materialsTab.Size = new System.Drawing.Size(376, 542);
+            this.materialsTab.TabIndex = 2;
+            this.materialsTab.Text = "Материалы";
+            this.materialsTab.UseVisualStyleBackColor = true;
             // 
             // btnDelCond
             // 
@@ -571,21 +468,21 @@
             this.funcsLabelCond.Tag = "base";
             this.funcsLabelCond.Text = "Функции:";
             // 
-            // statusTab
+            // productsTab
             // 
-            this.statusTab.Controls.Add(this.btnDelStatus);
-            this.statusTab.Controls.Add(this.btnEditStatus);
-            this.statusTab.Controls.Add(this.btnAddStatus);
-            this.statusTab.Controls.Add(this.txtStatusName);
-            this.statusTab.Controls.Add(this.labelStatusName);
-            this.statusTab.Controls.Add(this.funcsCmbStatus);
-            this.statusTab.Controls.Add(this.funcsLabelStatus);
-            this.statusTab.Location = new System.Drawing.Point(4, 22);
-            this.statusTab.Name = "statusTab";
-            this.statusTab.Size = new System.Drawing.Size(376, 542);
-            this.statusTab.TabIndex = 3;
-            this.statusTab.Text = "Статусы";
-            this.statusTab.UseVisualStyleBackColor = true;
+            this.productsTab.Controls.Add(this.btnDelStatus);
+            this.productsTab.Controls.Add(this.btnEditStatus);
+            this.productsTab.Controls.Add(this.btnAddStatus);
+            this.productsTab.Controls.Add(this.txtStatusName);
+            this.productsTab.Controls.Add(this.labelStatusName);
+            this.productsTab.Controls.Add(this.funcsCmbStatus);
+            this.productsTab.Controls.Add(this.funcsLabelStatus);
+            this.productsTab.Location = new System.Drawing.Point(4, 22);
+            this.productsTab.Name = "productsTab";
+            this.productsTab.Size = new System.Drawing.Size(376, 542);
+            this.productsTab.TabIndex = 3;
+            this.productsTab.Text = "Продукты";
+            this.productsTab.UseVisualStyleBackColor = true;
             // 
             // btnDelStatus
             // 
@@ -757,6 +654,33 @@
             this.funcsLabelRare.Tag = "base";
             this.funcsLabelRare.Text = "Функции:";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.47488F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.52512F));
+            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1095, 574);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(699, 568);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -766,82 +690,75 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.itemViewTab.ResumeLayout(false);
             this.itemViewTab.PerformLayout();
-            this.collsTab.ResumeLayout(false);
-            this.collsTab.PerformLayout();
-            this.condTab.ResumeLayout(false);
-            this.condTab.PerformLayout();
-            this.statusTab.ResumeLayout(false);
-            this.statusTab.PerformLayout();
+            this.typesTab.ResumeLayout(false);
+            this.typesTab.PerformLayout();
+            this.materialsTab.ResumeLayout(false);
+            this.materialsTab.PerformLayout();
+            this.productsTab.ResumeLayout(false);
+            this.productsTab.PerformLayout();
             this.raresTab.ResumeLayout(false);
             this.raresTab.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage itemViewTab;
-        private System.Windows.Forms.Button btnAddMain;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label labelMainName;
-        private System.Windows.Forms.ComboBox funcsCmbMain;
-        private System.Windows.Forms.Label funcsLabelMain;
-        private System.Windows.Forms.TabPage collsTab;
-        private System.Windows.Forms.Label labelMainColl;
-        private System.Windows.Forms.ComboBox cmbCollection;
-        private System.Windows.Forms.Label labelMainYear;
-        private System.Windows.Forms.Label labelMainCond;
-        private System.Windows.Forms.TextBox txtYear;
-        private System.Windows.Forms.ComboBox cmbStatus;
-        private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.TextBox txtPlace;
-        private System.Windows.Forms.Label labelMainPlace;
-        private System.Windows.Forms.ComboBox cmbRare;
-        private System.Windows.Forms.ComboBox cmbCondition;
-        private System.Windows.Forms.Label labelMainRare;
-        private System.Windows.Forms.TextBox txtValue;
-        private System.Windows.Forms.Label labelValue;
-        private System.Windows.Forms.TabPage condTab;
-        private System.Windows.Forms.TabPage statusTab;
-        private System.Windows.Forms.TabPage raresTab;
-        private System.Windows.Forms.TextBox txtCollsName;
-        private System.Windows.Forms.Label labelCollsName;
-        private System.Windows.Forms.ComboBox funcsCmbColls;
-        private System.Windows.Forms.Label funcsLabelColls;
-        private System.Windows.Forms.TextBox txtCondName;
-        private System.Windows.Forms.Label labelCondName;
-        private System.Windows.Forms.ComboBox funcsCmbCond;
-        private System.Windows.Forms.Label funcsLabelCond;
-        private System.Windows.Forms.TextBox txtStatusName;
-        private System.Windows.Forms.Label labelStatusName;
-        private System.Windows.Forms.ComboBox funcsCmbStatus;
-        private System.Windows.Forms.Label funcsLabelStatus;
-        private System.Windows.Forms.TextBox txtRareName;
-        private System.Windows.Forms.Label labelRareName;
-        private System.Windows.Forms.ComboBox funcsCmbRare;
-        private System.Windows.Forms.Label funcsLabelRare;
-        private System.Windows.Forms.Button btnAddColls;
-        private System.Windows.Forms.Button btnAddCond;
-        private System.Windows.Forms.Button btnAddStatus;
-        private System.Windows.Forms.Button btnAddRare;
-        private System.Windows.Forms.Button delBtn;
-        private System.Windows.Forms.Button editBtn;
-        private System.Windows.Forms.Button btnDelColls;
-        private System.Windows.Forms.Button btnEditColls;
-        private System.Windows.Forms.Button btnDelCond;
-        private System.Windows.Forms.Button btnEditCond;
-        private System.Windows.Forms.Button btnDelStatus;
-        private System.Windows.Forms.Button btnEditStatus;
-        private System.Windows.Forms.Button btnDelRare;
-        private System.Windows.Forms.Button btnEditRare;
+        private TabControl tabControl1;
+        private TabPage itemViewTab;
+        private Button delBtn;
+        private Button editBtn;
+        private TextBox txtRating;
+        private Label labelRating;
+        private TextBox txtPhone;
+        private Label labelMainPhone;
+        private TextBox txtDirector;
+        private Label labelMainDirector;
+        private ComboBox cmbType;
+        private Label labelMainType;
+        private Button btnAddMain;
+        private TextBox txtName;
+        private Label labelMainName;
+        private ComboBox funcsCmbMain;
+        private Label funcsLabelMain;
+        private TabPage typesTab;
+        private Button btnDelColls;
+        private Button btnEditColls;
+        private Button btnAddColls;
+        private TextBox txtCollsName;
+        private Label labelCollsName;
+        private ComboBox funcsCmbColls;
+        private Label funcsLabelColls;
+        private TabPage materialsTab;
+        private Button btnDelCond;
+        private Button btnEditCond;
+        private Button btnAddCond;
+        private TextBox txtCondName;
+        private Label labelCondName;
+        private ComboBox funcsCmbCond;
+        private Label funcsLabelCond;
+        private TabPage productsTab;
+        private Button btnDelStatus;
+        private Button btnEditStatus;
+        private Button btnAddStatus;
+        private TextBox txtStatusName;
+        private Label labelStatusName;
+        private ComboBox funcsCmbStatus;
+        private Label funcsLabelStatus;
+        private TabPage raresTab;
+        private Button btnDelRare;
+        private Button btnEditRare;
+        private Button btnAddRare;
+        private TextBox txtRareName;
+        private Label labelRareName;
+        private ComboBox funcsCmbRare;
+        private Label funcsLabelRare;
+        private TableLayoutPanel tableLayoutPanel1;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

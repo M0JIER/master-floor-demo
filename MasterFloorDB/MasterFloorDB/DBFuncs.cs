@@ -28,64 +28,84 @@ namespace MasterFloorDB.Entities
             {
                 conn.Open();
 
+                //insert or ignore into Product_type(Type) values(""Спекулянт""), (""Перекуп""), (""Инвестор""), (""Пенсионер"");
+
+
                 string sqlItems =
-                @"CREATE TABLE IF NOT EXISTS Items(
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                CollectionId INTEGER,
-                Name TEXT,
-                Year INTEGER,
-                ConditionId INTEGER,
-                RareId INTEGER,
-                StoragePlace TEXT,
-                Value REAL,
-                StatusID INTEGER,
-                FOREIGN KEY (CollectionId) REFERENCES Collections(Id),
-                FOREIGN KEY (ConditionId) REFERENCES Conditions(Id),
-                FOREIGN KEY (RareId) REFERENCES Rares(Id),
-                FOREIGN KEY (StatusId) REFERENCES Status(Id)
+                @"CREATE TABLE if not exists ""Partners"" (
+	            ""Id""	INTEGER NOT NULL,
+	            ""Name""	TEXT NOT NULL,
+	            ""TypeId""	INTEGER NOT NULL,
+	            ""Address""	TEXT NOT NULL,
+	            ""TIN""	INTEGER NOT NULL,
+	            ""DirectorsName""	TEXT NOT NULL,
+	            ""Phone""	TEXT NOT NULL,
+	            ""Email""	TEXT NOT NULL,
+	            ""Rating""	INTEGER NOT NULL,
+	            PRIMARY KEY(""Id"" AUTOINCREMENT)
+                FOREIGN KEY (TypeId) REFERENCES Product_type(Id)
                 );
 
-                CREATE TABLE IF NOT EXISTS Collections(
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT UNIQUE);
-                insert or ignore into Collections(Name) values (""Монеты""), (""Виниловые пластинки""), (""Значки""), (""Марки"");
+                create table if not exists partner_type
+                (
+                Id integer PRIMARY KEY AUTOINCREMENT,
+                Name TEXT UNIQUE
+                );
+                insert or ignore into partner_type (name) VALUES
+                (""ЗАО""), (""ООО""), (""ПАО""), (""ОАО"");
 
 
-                CREATE TABLE IF NOT EXISTS Conditions(
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT UNIQUE);
-                insert or ignore into Conditions(Name) values (""Ужасное""), (""Нормальное""), (""Отличное"");
+                CREATE TABLE if not exists ""Product_type"" (
+                	""Id""	INTEGER,
+                	""Type""	TEXT UNIQUE,
+                	""Ratio""	REAL,
+                	PRIMARY KEY(""Id"" AUTOINCREMENT)
+                );
 
 
-                CREATE TABLE IF NOT EXISTS Rares(
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT UNIQUE);
-                insert or ignore into Rares(Name) values (""Обычное""), (""Необычное""), (""Редкое""), 
-                                                            (""Эпическое""), (""Мифическое""), (""Легендарное"");
+                CREATE TABLE if not exists ""PartnerProduct"" (
+                	""Id""	INTEGER,
+                	""ProductId""	INTEGER,
+                	""PartnerId""	INTEGER,
+                	""NumberOfProd""	INTEGER,
+                	""SellDate""	TEXT,
+                	PRIMARY KEY(""Id"" AUTOINCREMENT),
+                	FOREIGN KEY(""PartnerId"") REFERENCES ""Partners""(""Id""),
+                	FOREIGN KEY(""ProductId"") REFERENCES ""Products""(""Id"")
+                );
 
-        
-                CREATE TABLE IF NOT EXISTS Status(
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name TEXT UNIQUE);
-                insert or ignore into Status (Name) values (""Выставлено на продажу""), (""Подлежит обмену""), (""Требует реставрации""); 
 
 
-                create view if not exists itemsView as
+
+                CREATE TABLE if not exists ""Material_type"" (
+                	""Id""	INTEGER,
+                	""Type""	TEXT,
+                	""DefectPerc""	REAL,
+                	PRIMARY KEY(""Id"" AUTOINCREMENT)
+                );
+
+
+
+                CREATE TABLE if not exists ""Products"" (
+                	""Id""	INTEGER,
+                	""Name""	TEXT,
+                	""Type""	TEXT,
+                	""Art""	INTEGER,
+                	""MinPrice""	REAL,
+                	PRIMARY KEY(""Id"" AUTOINCREMENT)
+                );
+
+
+                create view if not exists partnersView as
                 select 
                 i.Id as Id,
+                t.name as ""Тип"",
                 i.name as ""Название"",
-                col.Name as ""Коллекция"",
-                i.Year as ""Год"",
-                con.Name as ""Состояние"",
-                r.Name as ""Редкость"",
-                i.StoragePlace as ""Место хранения"",
-                s.name as ""Статус"",
-                i.Value as ""Стоимость""
-                from Items i
-                join Collections col on col.Id = i.CollectionId
-                join Conditions con on con.Id = i.ConditionId
-                join Status s on s.Id = i.StatusID
-                join Rares r on r.Id = i.RareId";
+                i.DirectorsName as ""Директор"",
+                i.Phone as ""Телефон"",
+                i.Rating as ""Рейтинг""
+                from Partners i
+                left join partner_type t on t.Id = i.TypeId";
 
                 
                 SQLiteCommand cmd = new SQLiteCommand(sqlItems, conn);
@@ -93,7 +113,7 @@ namespace MasterFloorDB.Entities
             }
         }
 
-        public static DataTable GetAll()
+        public static List<Items> GetAll()
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
@@ -102,35 +122,53 @@ namespace MasterFloorDB.Entities
                 SQLiteDataAdapter adapter =
                     new SQLiteDataAdapter("SELECT * FROM itemsView", conn);
 
-                DataTable table = new DataTable();
-                adapter.Fill(table);
+                SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM partnersView", conn);
+                var reader = cmd.ExecuteReader();
 
-                return table;
+                List<Items> items = new List<Items>();
+                while (reader.Read())
+                {
+                    if (reader!=null)
+                    {
+                        items.Add(new Items()
+                        {
+                            //Type = new SQLiteCommand($"select Name from Types where Id = {int.Parse(reader.GetString(1))}", conn)
+                            //.ExecuteReader().GetString(0),
+                            Type = new Types() { Name = reader.GetString(1) },
+                            Name = reader.GetString(2),
+                            Director = reader.GetString(3),
+                            Phone = reader.GetString(4),
+                            Rating = reader.GetInt16(5)
+                        });
+                    }
+                }
+
+                return items;
             }
         }
 
-        public static List<Collections> GetCollsList()
+        public static List<Types> GetTypesList()
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
 
-                List<Collections> colls = new List<Collections>();
+                List<Types> types = new List<Types>();
 
-                var cmd = new SQLiteCommand("Select * from Collections", conn);
+                var cmd = new SQLiteCommand("Select * from partner_type", conn);
                 using (cmd)
                 {
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        colls.Add(new Collections()
+                        types.Add(new Types()
                         {
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1)
                         });
                     }
                 }
-                    return colls;
+                    return types;
             }
         }
         public static DataTable GetData(string data)
@@ -147,7 +185,7 @@ namespace MasterFloorDB.Entities
         }
 
         public static bool UpdateItemsData(string table,
-            int id, string name, int colId, int? year, int condId, int rareId, string place, int statusId, int? value )
+            int id, string name, int typeId, string director, string phone, int? rating)
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
@@ -156,26 +194,20 @@ namespace MasterFloorDB.Entities
                     $@"
                     update {table}
                     set 
-                    name = @name,
-                    CollectionId = @colId,
-                    Year = @year,
-                    ConditionId = @condId,
-                    RareId = @rareId ,
-                    StoragePlace = @place,
-                    Value = @value,
-                    StatusId = @statusId
+                    Name = @name,
+                    TypeId = @typeId,
+                    DirectorsName = @director,
+                    Phone = @phone,
+                    Rating = @rating,
                     where id = @id
                     ";
                 var cmd = new SQLiteCommand(com, conn);
 
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@colId", colId);
-                cmd.Parameters.AddWithValue("@year", year);
-                cmd.Parameters.AddWithValue("@condId", condId);
-                cmd.Parameters.AddWithValue("@rareId", rareId);
-                cmd.Parameters.AddWithValue("@place", place);
-                cmd.Parameters.AddWithValue("@value", value);
-                cmd.Parameters.AddWithValue("@statusId", statusId);
+                cmd.Parameters.AddWithValue("@typeId", typeId);
+                cmd.Parameters.AddWithValue("@phone", phone);
+                cmd.Parameters.AddWithValue("@rating", rating);
+
                 cmd.Parameters.AddWithValue("@id", id);
 
                 foreach (SQLiteParameter par in cmd.Parameters)
@@ -232,7 +264,7 @@ namespace MasterFloorDB.Entities
                 List<Conditions> conds = new List<Conditions>();
 
                 var reader = new SQLiteCommand("select * from Conditions", connection).ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     conds.Add(new Conditions()
                     {
@@ -244,46 +276,47 @@ namespace MasterFloorDB.Entities
             }
         }
 
-        public static List<Rares> GetRaresList()
+        public static List<Materials> GetMaterialsList()
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
 
-                List<Rares> rare = new List<Rares>();
+                List<Materials> materials = new List<Materials>();
 
-                var reader = new SQLiteCommand("select * from Rares", connection).ExecuteReader();
+                var reader = new SQLiteCommand("select * from Material_type", connection).ExecuteReader();
                 while (reader.Read())
                 {
-                    rare.Add(new Rares()
+                    materials
+                    .Add(new Materials()
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1)
                     });
                 }
-                return rare;
+                return materials;
             }
         }
 
 
-        public static List<Status> GetStatusList()
+        public static List<Products> GetProductsList()
         {
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
 
-                List<Status> statuses = new List<Status>();
+                List<Products> products = new List<Products>();
 
-                var reader = new SQLiteCommand("Select * from Status", connection).ExecuteReader();
+                var reader = new SQLiteCommand("Select * from Products", connection).ExecuteReader();
                 while (reader.Read())
                 {
-                    statuses.Add(new Status() 
+                    products.Add(new Products() 
                     { 
                         Id = reader.GetInt32(0), 
                         Name = reader.GetString(1)
                     });
                 }
-                return statuses;
+                return products;
 
             }
         }
@@ -297,22 +330,19 @@ namespace MasterFloorDB.Entities
                 conn.Open();
 
                 string sql =
-                @"INSERT INTO Items
-            (CollectionId,Name,Year,ConditionId,RareId,StoragePlace,Value,StatusId)
-            VALUES(@type,@name,@year,@cond,@rare,@place,@value,@status)";
+                @"INSERT INTO Partners
+            (TypeId,Name,DirectorsName,Phone,Rating)
+            VALUES(@type,@name,@director,@phone,@rating)";
 
                 SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@type", item.CollectionType.Id);
                 cmd.Parameters.AddWithValue("@name", item.Name);
-                cmd.Parameters.AddWithValue("@year", item.Year);
-                cmd.Parameters.AddWithValue("@cond", item.Condition.Id);
-                cmd.Parameters.AddWithValue("@rare", item.Rare.Id);
-                cmd.Parameters.AddWithValue("@place", item.StoragePlace);
-                cmd.Parameters.AddWithValue("@value", item.Price);
-                cmd.Parameters.AddWithValue("@status", item.Status.Id);
+                cmd.Parameters.AddWithValue("@type", item.Type.Id);
+                cmd.Parameters.AddWithValue("@director", item.Director);
+                cmd.Parameters.AddWithValue("@phone", item.Phone);
+                cmd.Parameters.AddWithValue("@rating", item.Rating);
 
-                foreach (SQLiteParameter par in  cmd.Parameters)
+                foreach (SQLiteParameter par in cmd.Parameters)
                 {
                     if (par == null || par.Value.ToString() == "")
                     {
@@ -387,9 +417,9 @@ namespace MasterFloorDB.Entities
                 return table;
             }
         }
-        //public Collections GetCollection(DBFuncs dB, string cellName)
+        //public Types GetCollection(DBFuncs dB, string cellName)
         //{
-        //    Collections i = dB.;
+        //    Types i = dB.;
         //    var c = from p in i.Name
         //            where p.ToString() == cellName
         //            select p;
