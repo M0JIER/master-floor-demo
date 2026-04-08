@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -105,9 +105,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ReqItem";
-            this.Size = new System.Drawing.Size(348, 117);
+            this.Size = new System.Drawing.Size(346, 115);
             this.Load += new System.EventHandler(this.ReqItem_Load);
             this.Click += new System.EventHandler(this.ReqItem_Click);
+            this.Leave += new System.EventHandler(this.ReqItem_Leave);
             this.ResumeLayout(false);
             this.PerformLayout();
 

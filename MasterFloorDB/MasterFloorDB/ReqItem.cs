@@ -16,7 +16,7 @@ namespace MasterFloorDB
     {
         public event EventHandler<Items> passItem;
         Items item;
-        public ReqItem(Types type, string lab2, string lab3, string lab4, string lab6)
+        public ReqItem(int id, Types type, string lab2, string lab3, string lab4, string lab6)
         {
             InitializeComponent();
 
@@ -28,6 +28,7 @@ namespace MasterFloorDB
 
             item = new Items()
             {
+                Id = id,
                 Type = type,
                 Name = lab2,
                 Director = lab3,
@@ -44,6 +45,13 @@ namespace MasterFloorDB
         private void ReqItem_Click(object sender, EventArgs e)
         {
             passItem?.Invoke(this, item);
+
+            this.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void ReqItem_Leave(object sender, EventArgs e)
+        {
+            this.BorderStyle = BorderStyle.Fixed3D;
         }
     }
 }

@@ -11,17 +11,47 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Text.Json;
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+
+
 
 namespace MasterFloorDB
 {
     public partial class Form1 : Form
     {
+
+        #region ВИН 32 АПИ
+        //[DllImport("user32.dll")]
+        //private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, string lParam);
+
+        //public static class Win32Helper
+        //{
+        //    // Номер команды для установки баннера-подсказки
+        //    private const int EM_SETCUEBANNER = 0x1501;
+
+        //    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        //    private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, string lParam);
+
+        //    public static void SetPlaceholder(Control control, string text)
+        //    {
+        //        // Отправляем сообщение: 
+        //        // control.Handle — кому (ID текстового поля)
+        //        // EM_SETCUEBANNER — что сделать (показать подсказку)
+        //        // 1 — условие (показывать, даже когда фокус внутри)
+        //        // text — саму строку
+        //        SendMessage(control.Handle, EM_SETCUEBANNER, 0, text);
+        //    }
+        //}
+        #endregion
+
+
         DBFuncs db = new DBFuncs();
 
         List<Products> products;
         List<Conditions> conditions;
         List<Materials> Materials;
         List<Types> types;
+        List<ProdTypes> prodTypes;
 
         Control[] baseControls;
         Control[] CreateLine;
@@ -61,9 +91,10 @@ namespace MasterFloorDB
 
         void createItem()
         {
+            flowLayoutPanel1.Controls.Clear();
             foreach (Items i in DBFuncs.GetAll())
             {
-                ReqItem item = new ReqItem(i.Type, i.Name, i.Director, i.Phone, i.Rating.ToString());
+                ReqItem item = new ReqItem(i.Id, i.Type, i.Name, i.Director, i.Phone, i.Rating.ToString());
                 item.Dock = DockStyle.Top;
                 item.passItem += receiveItem;
 
@@ -77,7 +108,7 @@ namespace MasterFloorDB
             varId = item.Id;
 
             txtName.Text = item.Name;
-            cmbType.SelectedIndex = cmbType.Items.IndexOf(item.Type);
+            cmbType.SelectedIndex = cmbType.Items.IndexOf(item.Type.Name);
             txtDirector.Text = item.Director;
             txtPhone.Text = item.Phone;
             txtRating.Text = item.Rating.ToString();
@@ -86,14 +117,52 @@ namespace MasterFloorDB
 
         void createItem(string data)
         {
+            flowLayoutPanel1.Controls.Clear();
             DataGridView dataview = new DataGridView();
             dataview.DataSource = DBFuncs.GetData(data);
             dataview.AutoSize = true;
+            dataview.RowHeadersVisible = false;
+            dataview.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataview.MultiSelect = false;
+            dataview.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dataview.AllowUserToAddRows = false;
+            dataview.AllowUserToDeleteRows = false;
+
+            dataview.CellClick += cellClick;
             //dataview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             //(dataview.Width, dataview.Height) = (flowLayoutPanel1.Width, flowLayoutPanel1.Height);
 
             flowLayoutPanel1.Controls.Add(dataview);
         }
+
+
+        private void cellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dv = (DataGridView)sender;
+
+            if (e.RowIndex <= -1 || e.ColumnIndex <= -1) return;
+
+            varId = int.Parse(dv[0, e.RowIndex].Value.ToString());
+            switch (tabControl1.SelectedIndex)
+            {
+                case 1:
+                    txtCollsName.Text = dv[1, e.RowIndex].Value.ToString(); 
+                    break;
+                case 2:
+                    txtCondName.Text = dv[1, e.RowIndex].Value.ToString();
+                    txtCondDef.Text = dv[2, e.RowIndex].Value.ToString();
+                    break;
+                case 3:
+                    txtStatusName.Text = dv[2, e.RowIndex].Value.ToString();
+                    cmbStatusType.SelectedIndex = cmbStatusType.Items.IndexOf(dv[1,e.RowIndex].Value.ToString());
+                    txtStatusArt.Text = dv[3, e.RowIndex].Value.ToString();
+                    txtStatusPrice.Text = dv[4, e.RowIndex].Value.ToString();
+
+                    break;
+            }
+        }
+
+
 
         void LoadData(selectedTab mode)
         {
@@ -104,11 +173,11 @@ namespace MasterFloorDB
                     createItem();
                     break;
                 case selectedTab.Types:
-                    createItem("Product_type");
+                    createItem("partner_type");
                     
                     break;
                 case selectedTab.Products:
-                    createItem("Products");
+                    createItem("ProductsView");
                     break;
                 case selectedTab.Materials:
                     createItem("Material_type");
@@ -126,6 +195,19 @@ namespace MasterFloorDB
             {
                 cb.SelectedIndex = 0;
             }
+
+            txtCondDef.Text = "0";
+            txtStatusPrice.Text = "0";
+            txtStatusArt.Text = "0";
+
+            txtCondDef.Enter += placeHolder_Enter;
+            txtCondDef.Leave += placeHolder_Leave;
+
+            txtStatusArt.Enter += placeHolder_Enter;
+            txtStatusArt.Leave += placeHolder_Leave;
+
+            txtStatusPrice.Enter += placeHolder_Enter;
+            txtStatusPrice.Leave += placeHolder_Leave;
 
             //foreach (Control control in itemViewTab.Controls)
             //{
@@ -146,6 +228,14 @@ namespace MasterFloorDB
                 holder.Add(c.Name);
             }
             cmbType.DataSource = holder;
+
+            List<string> holder1 = new List<string>();
+            foreach (ProdTypes c in prodTypes)
+            {
+                holder1.Add(c.Name);
+            }
+            cmbStatusType.DataSource = holder1;
+
             //holder.Clear();
         }
 
@@ -157,15 +247,16 @@ namespace MasterFloorDB
                 funcsLabelColls,
                 funcsLabelCond,
                 funcsLabelStatus,
-                funcsLabelRare,
+                //funcsLabelRare,
                 funcsCmbMain,
                 funcsCmbColls,
                 funcsCmbCond,
                 funcsCmbStatus,
-                funcsCmbRare
+                //funcsCmbRare
             };
             products = DBFuncs.GetProductsList();
             types = DBFuncs.GetTypesList();
+            prodTypes = DBFuncs.GetProdTypesList();
             //conditions = DBFuncs.GetConditionsList();
             Materials = DBFuncs.GetMaterialsList();
             updCmb();
@@ -188,8 +279,8 @@ namespace MasterFloorDB
                 ,funcsLabelStatus
                 ,funcsCmbStatus
 
-                ,funcsLabelRare
-                ,funcsCmbRare
+                //,funcsLabelRare
+                //,funcsCmbRare
 
                 //Общие
                 ,txtRating
@@ -204,25 +295,35 @@ namespace MasterFloorDB
                 ,txtName
                 ,labelMainName
 
-                //Коллекции
+                //Типы
                 ,labelCollsName
                 ,txtCollsName
-                ,btnAddColls
+                ,btnAddTypes
+                ,labelCondDef
+                ,txtCondDef
 
-                //Состояния
+                //Материалы
                 ,labelCondName
                 ,txtCondName
                 ,btnAddCond
+                ,labelCondDef
+                ,txtCondDef
 
-                //Статусы
+                //Продукты
                 ,labelStatusName
                 ,txtStatusName
                 ,btnAddStatus
+                ,labelStatusType
+                ,cmbStatusType
+                ,labelStatusArt
+                ,txtStatusArt
+                ,labelStatusPrice
+                ,txtStatusPrice
 
                 //Редкости
-                ,labelRareName
-                ,txtRareName
-                ,btnAddRare
+                //,labelRareName
+                //,txtRareName
+                //,btnAddRare
             };
 
             EditLine = new Control[]
@@ -240,8 +341,8 @@ namespace MasterFloorDB
                 ,funcsLabelStatus
                 ,funcsCmbStatus
 
-                ,funcsLabelRare
-                ,funcsCmbRare
+                //,funcsLabelRare
+                //,funcsCmbRare
 
 
 
@@ -259,29 +360,39 @@ namespace MasterFloorDB
                 ,txtName
                 ,labelMainName
 
-                //Коллекции
+                //Типы
                 ,labelCollsName
                 ,txtCollsName
-                ,btnEditColls
-                ,btnDelColls
+                ,btnEditTypes
+                ,btnDelTypes
 
-                //Состояния
+                //Материалы
                 ,labelCondName
                 ,txtCondName
                 ,btnDelCond
                 ,btnEditCond
+                ,labelCondDef
+                ,txtCondDef
 
-                //Статусы
+
+                //Продукты
                 ,labelStatusName
                 ,txtStatusName
                 ,btnEditStatus
                 ,btnDelStatus
+                ,labelStatusType
+                ,cmbStatusType
+                ,labelStatusArt
+                ,txtStatusArt
+                ,labelStatusPrice
+                ,txtStatusPrice
+
 
                 //Редкости
-                ,labelRareName
-                ,txtRareName
-                ,btnEditRare
-                ,btnDelRare
+                //,labelRareName
+                //,txtRareName
+                //,btnEditRare
+                //,btnDelRare
 
             };
         }
@@ -292,7 +403,7 @@ namespace MasterFloorDB
             {
                 foreach (ComboBox c in tabPage.Controls.OfType<ComboBox>())
                 {
-                    if (c.Tag.ToString() == "base")
+                    if (c.Tag?.ToString() == "base")
                     {
                         c.SelectedIndexChanged += comboBox_GlobalBase;
                     }
@@ -350,7 +461,7 @@ namespace MasterFloorDB
             {
                 foreach (Types s in types)
                 {
-                    if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
+                    if (subj.ToLower() == s.Name.ToLower()) { MessageBox.Show("Такое поле уже существует"); return false; }
                 }
             }
 
@@ -358,7 +469,7 @@ namespace MasterFloorDB
             {
                 foreach (Conditions s in conditions)
                 {
-                    if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
+                    if (subj.ToLower() == s.Name.ToLower()) { MessageBox.Show("Такое поле уже существует"); return false; }
                 }
             }
 
@@ -366,7 +477,7 @@ namespace MasterFloorDB
             {
                 foreach (Materials s in Materials)
                 {
-                    if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
+                    if (subj.ToLower() == s.Name.ToLower()) { MessageBox.Show("Такое поле уже существует"); return false; }
                 }
             }
 
@@ -374,7 +485,7 @@ namespace MasterFloorDB
             {
                 foreach (Products s in products)
                 {
-                    if (subj.ToLower() == s.Name.ToLower()) MessageBox.Show("Такое поле уже существует"); return false;
+                    if (subj.ToLower() == s.Name.ToLower()) { MessageBox.Show("Такое поле уже существует"); return false; }
                 }
             }
 
@@ -398,6 +509,9 @@ namespace MasterFloorDB
         //}
 
 
+
+        #region KeyPress
+
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -415,73 +529,57 @@ namespace MasterFloorDB
             }
 
         }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && !(e.KeyChar==','))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void textBox2_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
 
 
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 0)
+            switch (tabControl1.SelectedIndex)
             {
-                LoadData(selectedTab.Items);
-                //dataGridView1.DataSource = DBFuncs.GetAll();
+                case 0:
+                    LoadData(selectedTab.Items);
+                    break;
+                case 1:
+                    LoadData(selectedTab.Types);
+                    break;
+                case 2:
+                    LoadData(selectedTab.Materials);
+                    break;
+                case 3:
+                    LoadData(selectedTab.Products);
+                    break;
+                case 4:
+                    LoadData(selectedTab.Materials);
+                    break;
             }
-            else if (tabControl1.SelectedIndex == 1)
-            {
-                //dataGridView1.DataSource = DBFuncs.GetData("Types");
-                LoadData(selectedTab.Types);
-            }
-            else if (tabControl1.SelectedIndex == 2)
-            {
-                //dataGridView1.DataSource = DBFuncs.GetData("Conditions");
-                LoadData(selectedTab.Materials);
-            }
-            else if (tabControl1.SelectedIndex == 3)
-            {
-                //dataGridView1.DataSource = DBFuncs.GetData("Status");
-                LoadData(selectedTab.Products);
-            }
-            else if (tabControl1.SelectedIndex == 4)
-            {
-                //dataGridView1.DataSource = DBFuncs.GetData("Materials");
-                LoadData(selectedTab.Materials);
-            }
+
         }
 
-        private void btnAddMain_Click(object sender, EventArgs e)
-        {
-            Items item = new Items();
-
-            item.Name = txtName.Text;
-            if (cmbType.Text == "") { MessageBox.Show("Выберите тип"); return; } item.Type = types.FirstOrDefault(type => type.Name == cmbType.Text);
-            item.Director = txtDirector.Text;
-            item.Phone = txtPhone.Text;
-            if (txtRating.Text == "") item.Rating = null; item.Rating = int.Parse(txtRating.Text);
-
-            //if (txtYear.Text == null || txtYear.Text == "") item.Year = null; else item.Year = int.Parse(txtYear.Text);
-            //item.StoragePlace = txtPlace.Text;
-            //if (txtValue.Text == null || txtValue.Text == "") item.Price = null; else item.Price = Convert.ToDouble(txtValue.Text);
-            //item.Status = statuses.FirstOrDefault(stat => stat.Name == cmbStatus.Text);
-
-            if (DBFuncs.Add(item))
-                updLists();
-            LoadData(selectedTab.Items);
-        }
-
-        private void editBtn_Click(object sender, EventArgs e)
-        {
-            int? rating;
-            if(int.TryParse(txtRating.Text, out int f)) { rating = f; } else rating = null;
-            if (DBFuncs.UpdateItemsData
-                 ("Partners",
-                 varId,
-                 txtName.Text,
-                 types.FirstOrDefault(c => c.Name == cmbType.Text).Id,
-                 txtDirector.Text,
-                 txtPhone.Text,
-                 rating))
-                updLists();
-            LoadData(selectedTab.Items);
-        }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -536,31 +634,75 @@ namespace MasterFloorDB
 
         }
 
-        private void delBtn_Click(object sender, EventArgs e)
+        #region Кнопки
+
+        private void btnAddMain_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Items", varId);
-            updLists();
+            Items item = new Items();
+
+            item.Name = txtName.Text;
+            if (cmbType.Text == "") { MessageBox.Show("Заполнены не все столбцы"); return; }
+            item.Type = types.FirstOrDefault(type => type.Name == cmbType.Text);
+            item.Director = txtDirector.Text;
+            item.Phone = txtPhone.Text;
+            if (txtRating.Text == "") { MessageBox.Show("Заполнены не все столбцы"); return; }
+            item.Rating = null; item.Rating = int.Parse(txtRating.Text);
+
+            if (DBFuncs.Add(item))
+            {
+                updLists();
+                LoadData(selectedTab.Items);
+            }
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            int? rating;
+            if (int.TryParse(txtRating.Text, out int f)) { rating = f; } else rating = null;
+            if (DBFuncs.UpdateItemsData
+                 ("Partners",
+                 varId,
+                 txtName.Text,
+                 types.FirstOrDefault(c => c.Name == cmbType.Text).Id,
+                 txtDirector.Text,
+                 txtPhone.Text,
+                 rating))
+                updLists();
             LoadData(selectedTab.Items);
         }
 
-        private void btnAddColls_Click(object sender, EventArgs e)
+
+
+
+
+
+        private void delBtn_Click(object sender, EventArgs e)
         {
-            if (isUnique(types, txtCollsName.Text))
-            if (DBFuncs.AddDataInBase("Types", txtCollsName.Text))
+            DBFuncs.DeleteData("Partners", varId);
             updLists();
+            LoadData(selectedTab.Items);
+        }
+        private void btnAddTypes_Click(object sender, EventArgs e)
+        {
+            labelCollsName.Text = "1";
+            if (isUnique(types, txtCollsName.Text))
+                if (DBFuncs.AddDataInBase("partner_type", txtCollsName.Text))
+                    updLists();
             LoadData(selectedTab.Types);
+            labelCollsName.Text = "2";
+
         }
 
         private void btnEditColls_Click(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Types", txtCollsName.Text, varId))
+            if (DBFuncs.UpdateData("partner_type", txtCollsName.Text, varId))
             updLists();
             LoadData(selectedTab.Types);
         }
 
         private void btnDelColls_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Types", varId);
+            DBFuncs.DeleteData("partner_type", varId);
             updLists();
             LoadData(selectedTab.Types);
         }
@@ -568,68 +710,95 @@ namespace MasterFloorDB
         private void btnAddCond_Click(object sender, EventArgs e)
         {
             if (isUnique(conditions, txtCondName.Text))
-            if (DBFuncs.AddDataInBase("Conditions", txtCondName.Text))
-            updLists();
-            //LoadData(selectedTab.Conditions);
+            {
+                decimal.TryParse(txtCondDef.Text, out decimal perc);
+                if (DBFuncs.AddMatsInBase(txtCondName.Text, perc))
+                updLists();
+                LoadData(selectedTab.Materials);
+            }
         }
 
         private void btnEditCond_Click(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Conditions", txtCondName.Text, varId))
+            decimal.TryParse(txtCondDef.Text, out decimal perc);
+            if (DBFuncs.UpdateMats(txtCondName.Text, perc, varId))
             updLists();
-            //LoadData(selectedTab.Conditions);
+            LoadData(selectedTab.Materials);
         }
 
         private void btnDelCond_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Conditions", varId);
+            DBFuncs.DeleteData("Material_type", varId);
             updLists();
-            //LoadData(selectedTab.Conditions);
+            LoadData(selectedTab.Materials);
         }
 
         private void btnAddStatus_Click(object sender, EventArgs e)
         {
-            if (isUnique(products, txtStatusName.Text))
-            if (DBFuncs.AddDataInBase("Status", txtStatusName.Text))
+            Products product = new Products();
+
+            product.TypeId = prodTypes.FirstOrDefault(t=> t.Name==cmbStatusType.Text).Id;
+            product.Name = txtStatusName.Text;
+            int.TryParse(txtStatusArt.Text, out int i);
+            product.Art = i;
+            decimal.TryParse(txtStatusPrice.Text, out decimal f);
+            product.MinPrice = f;
+            //if (isUnique(products, txtStatusName.Text))
+            if (DBFuncs.AddProductsInBase(product))
             updLists();
             LoadData(selectedTab.Products);
         }
 
         private void btnEditStatus_Click(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Status", txtStatusName.Text,varId))
+            if (DBFuncs.UpdateData("Products", txtStatusName.Text,varId))
             updLists();
             LoadData(selectedTab.Products);
         }
 
         private void btnDelStatus_Click(object sender, EventArgs e)
         {
-            DBFuncs.DeleteData("Status", varId);
+            DBFuncs.DeleteData("Products", varId);
             updLists();
             LoadData(selectedTab.Products);
         }
 
-        private void btnAddRare_Click(object sender, EventArgs e)
+        //private void btnAddRare_Click(object sender, EventArgs e)
+        //{
+        //    if(isUnique(Materials, txtRareName.Text))
+        //    if (DBFuncs.AddDataInBase("Materials", txtRareName.Text))
+        //    updLists();
+        //    LoadData(selectedTab.Materials);
+        //}
+
+        //private void btnEditRare_Click(object sender, EventArgs e)
+        //{
+        //    if (DBFuncs.UpdateData("Materials", txtRareName.Text, varId))
+        //    updLists();
+        //    LoadData(selectedTab.Materials);
+        //}
+
+        //private void btnDelRare_Click(object sender, EventArgs e)
+        //{
+        //    DBFuncs.DeleteData("Materials", varId);
+        //    updLists();
+        //    LoadData(selectedTab.Materials);
+        //}
+
+        #endregion
+
+        private void placeHolder_Enter(object sender, EventArgs e)
         {
-            if(isUnique(Materials, txtRareName.Text))
-            if (DBFuncs.AddDataInBase("Materials", txtRareName.Text))
-            updLists();
-            LoadData(selectedTab.Materials);
+            TextBox txt = (TextBox)sender;
+            if (txt.Text != "0" && txt.Text != "") return;
+            txt.Text = "";
         }
 
-        private void btnEditRare_Click(object sender, EventArgs e)
+        private void placeHolder_Leave(object sender, EventArgs e)
         {
-            if (DBFuncs.UpdateData("Materials", txtRareName.Text, varId))
-            updLists();
-            LoadData(selectedTab.Materials);
+            TextBox txt = (TextBox)sender;
+            if (txt.Text != "0" && txt.Text != "") return;
+            txt.Text = "0";
         }
-
-        private void btnDelRare_Click(object sender, EventArgs e)
-        {
-            DBFuncs.DeleteData("Materials", varId);
-            updLists();
-            LoadData(selectedTab.Materials);
-        }
-
     }
 }
