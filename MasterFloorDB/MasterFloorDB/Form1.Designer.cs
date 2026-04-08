@@ -48,14 +48,16 @@ namespace MasterFloorDB
             this.funcsCmbMain = new System.Windows.Forms.ComboBox();
             this.funcsLabelMain = new System.Windows.Forms.Label();
             this.typesTab = new System.Windows.Forms.TabPage();
-            this.btnDelColls = new System.Windows.Forms.Button();
-            this.btnEditColls = new System.Windows.Forms.Button();
-            this.btnAddColls = new System.Windows.Forms.Button();
+            this.btnDelTypes = new System.Windows.Forms.Button();
+            this.btnEditTypes = new System.Windows.Forms.Button();
+            this.btnAddTypes = new System.Windows.Forms.Button();
             this.txtCollsName = new System.Windows.Forms.TextBox();
             this.labelCollsName = new System.Windows.Forms.Label();
             this.funcsCmbColls = new System.Windows.Forms.ComboBox();
             this.funcsLabelColls = new System.Windows.Forms.Label();
             this.materialsTab = new System.Windows.Forms.TabPage();
+            this.txtCondDef = new System.Windows.Forms.TextBox();
+            this.labelCondDef = new System.Windows.Forms.Label();
             this.btnDelCond = new System.Windows.Forms.Button();
             this.btnEditCond = new System.Windows.Forms.Button();
             this.btnAddCond = new System.Windows.Forms.Button();
@@ -64,6 +66,12 @@ namespace MasterFloorDB
             this.funcsCmbCond = new System.Windows.Forms.ComboBox();
             this.funcsLabelCond = new System.Windows.Forms.Label();
             this.productsTab = new System.Windows.Forms.TabPage();
+            this.txtStatusPrice = new System.Windows.Forms.TextBox();
+            this.txtStatusArt = new System.Windows.Forms.TextBox();
+            this.cmbStatusType = new System.Windows.Forms.ComboBox();
+            this.labelStatusPrice = new System.Windows.Forms.Label();
+            this.labelStatusArt = new System.Windows.Forms.Label();
+            this.labelStatusType = new System.Windows.Forms.Label();
             this.btnDelStatus = new System.Windows.Forms.Button();
             this.btnEditStatus = new System.Windows.Forms.Button();
             this.btnAddStatus = new System.Windows.Forms.Button();
@@ -71,14 +79,6 @@ namespace MasterFloorDB
             this.labelStatusName = new System.Windows.Forms.Label();
             this.funcsCmbStatus = new System.Windows.Forms.ComboBox();
             this.funcsLabelStatus = new System.Windows.Forms.Label();
-            this.raresTab = new System.Windows.Forms.TabPage();
-            this.btnDelRare = new System.Windows.Forms.Button();
-            this.btnEditRare = new System.Windows.Forms.Button();
-            this.btnAddRare = new System.Windows.Forms.Button();
-            this.txtRareName = new System.Windows.Forms.TextBox();
-            this.labelRareName = new System.Windows.Forms.Label();
-            this.funcsCmbRare = new System.Windows.Forms.ComboBox();
-            this.funcsLabelRare = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
@@ -86,7 +86,6 @@ namespace MasterFloorDB
             this.typesTab.SuspendLayout();
             this.materialsTab.SuspendLayout();
             this.productsTab.SuspendLayout();
-            this.raresTab.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +95,6 @@ namespace MasterFloorDB
             this.tabControl1.Controls.Add(this.typesTab);
             this.tabControl1.Controls.Add(this.materialsTab);
             this.tabControl1.Controls.Add(this.productsTab);
-            this.tabControl1.Controls.Add(this.raresTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(708, 3);
             this.tabControl1.Name = "tabControl1";
@@ -263,8 +261,7 @@ namespace MasterFloorDB
             this.funcsCmbMain.FormattingEnabled = true;
             this.funcsCmbMain.Items.AddRange(new object[] {
             "Добавить строку",
-            "Редактировать строку",
-            "Просмотр с фильтрами"});
+            "Редактировать строку"});
             this.funcsCmbMain.Location = new System.Drawing.Point(6, 24);
             this.funcsCmbMain.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.funcsCmbMain.Name = "funcsCmbMain";
@@ -284,9 +281,9 @@ namespace MasterFloorDB
             // 
             // typesTab
             // 
-            this.typesTab.Controls.Add(this.btnDelColls);
-            this.typesTab.Controls.Add(this.btnEditColls);
-            this.typesTab.Controls.Add(this.btnAddColls);
+            this.typesTab.Controls.Add(this.btnDelTypes);
+            this.typesTab.Controls.Add(this.btnEditTypes);
+            this.typesTab.Controls.Add(this.btnAddTypes);
             this.typesTab.Controls.Add(this.txtCollsName);
             this.typesTab.Controls.Add(this.labelCollsName);
             this.typesTab.Controls.Add(this.funcsCmbColls);
@@ -299,40 +296,40 @@ namespace MasterFloorDB
             this.typesTab.Text = "Типы";
             this.typesTab.UseVisualStyleBackColor = true;
             // 
-            // btnDelColls
+            // btnDelTypes
             // 
-            this.btnDelColls.Location = new System.Drawing.Point(188, 429);
-            this.btnDelColls.Name = "btnDelColls";
-            this.btnDelColls.Size = new System.Drawing.Size(123, 34);
-            this.btnDelColls.TabIndex = 83;
-            this.btnDelColls.Tag = "EditLine";
-            this.btnDelColls.Text = "Удалить запись";
-            this.btnDelColls.UseVisualStyleBackColor = true;
-            this.btnDelColls.Visible = false;
-            this.btnDelColls.Click += new System.EventHandler(this.btnDelColls_Click);
+            this.btnDelTypes.Location = new System.Drawing.Point(188, 429);
+            this.btnDelTypes.Name = "btnDelTypes";
+            this.btnDelTypes.Size = new System.Drawing.Size(123, 34);
+            this.btnDelTypes.TabIndex = 83;
+            this.btnDelTypes.Tag = "EditLine";
+            this.btnDelTypes.Text = "Удалить запись";
+            this.btnDelTypes.UseVisualStyleBackColor = true;
+            this.btnDelTypes.Visible = false;
+            this.btnDelTypes.Click += new System.EventHandler(this.btnDelColls_Click);
             // 
-            // btnEditColls
+            // btnEditTypes
             // 
-            this.btnEditColls.Location = new System.Drawing.Point(59, 429);
-            this.btnEditColls.Name = "btnEditColls";
-            this.btnEditColls.Size = new System.Drawing.Size(123, 34);
-            this.btnEditColls.TabIndex = 82;
-            this.btnEditColls.Tag = "EditLine";
-            this.btnEditColls.Text = "Изменить запись";
-            this.btnEditColls.UseVisualStyleBackColor = true;
-            this.btnEditColls.Visible = false;
-            this.btnEditColls.Click += new System.EventHandler(this.btnEditColls_Click);
+            this.btnEditTypes.Location = new System.Drawing.Point(59, 429);
+            this.btnEditTypes.Name = "btnEditTypes";
+            this.btnEditTypes.Size = new System.Drawing.Size(123, 34);
+            this.btnEditTypes.TabIndex = 82;
+            this.btnEditTypes.Tag = "EditLine";
+            this.btnEditTypes.Text = "Изменить запись";
+            this.btnEditTypes.UseVisualStyleBackColor = true;
+            this.btnEditTypes.Visible = false;
+            this.btnEditTypes.Click += new System.EventHandler(this.btnEditColls_Click);
             // 
-            // btnAddColls
+            // btnAddTypes
             // 
-            this.btnAddColls.Location = new System.Drawing.Point(110, 469);
-            this.btnAddColls.Name = "btnAddColls";
-            this.btnAddColls.Size = new System.Drawing.Size(123, 34);
-            this.btnAddColls.TabIndex = 81;
-            this.btnAddColls.Tag = "CreateLine";
-            this.btnAddColls.Text = "Добавить запись";
-            this.btnAddColls.UseVisualStyleBackColor = true;
-            this.btnAddColls.Click += new System.EventHandler(this.btnAddColls_Click);
+            this.btnAddTypes.Location = new System.Drawing.Point(110, 469);
+            this.btnAddTypes.Name = "btnAddTypes";
+            this.btnAddTypes.Size = new System.Drawing.Size(123, 34);
+            this.btnAddTypes.TabIndex = 81;
+            this.btnAddTypes.Tag = "CreateLine";
+            this.btnAddTypes.Text = "Добавить запись";
+            this.btnAddTypes.UseVisualStyleBackColor = true;
+            this.btnAddTypes.Click += new System.EventHandler(this.btnAddTypes_Click);
             // 
             // txtCollsName
             // 
@@ -377,6 +374,8 @@ namespace MasterFloorDB
             // 
             // materialsTab
             // 
+            this.materialsTab.Controls.Add(this.txtCondDef);
+            this.materialsTab.Controls.Add(this.labelCondDef);
             this.materialsTab.Controls.Add(this.btnDelCond);
             this.materialsTab.Controls.Add(this.btnEditCond);
             this.materialsTab.Controls.Add(this.btnAddCond);
@@ -390,6 +389,23 @@ namespace MasterFloorDB
             this.materialsTab.TabIndex = 2;
             this.materialsTab.Text = "Материалы";
             this.materialsTab.UseVisualStyleBackColor = true;
+            // 
+            // txtCondDef
+            // 
+            this.txtCondDef.Location = new System.Drawing.Point(112, 143);
+            this.txtCondDef.Name = "txtCondDef";
+            this.txtCondDef.Size = new System.Drawing.Size(235, 20);
+            this.txtCondDef.TabIndex = 85;
+            this.txtCondDef.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // labelCondDef
+            // 
+            this.labelCondDef.AutoSize = true;
+            this.labelCondDef.Location = new System.Drawing.Point(36, 146);
+            this.labelCondDef.Name = "labelCondDef";
+            this.labelCondDef.Size = new System.Drawing.Size(70, 13);
+            this.labelCondDef.TabIndex = 84;
+            this.labelCondDef.Text = "Шанс брака:";
             // 
             // btnDelCond
             // 
@@ -450,8 +466,7 @@ namespace MasterFloorDB
             this.funcsCmbCond.FormattingEnabled = true;
             this.funcsCmbCond.Items.AddRange(new object[] {
             "Добавить строку",
-            "Редактировать строку",
-            "Просмотр с фильтрами"});
+            "Редактировать строку"});
             this.funcsCmbCond.Location = new System.Drawing.Point(6, 27);
             this.funcsCmbCond.Name = "funcsCmbCond";
             this.funcsCmbCond.Size = new System.Drawing.Size(121, 21);
@@ -470,6 +485,12 @@ namespace MasterFloorDB
             // 
             // productsTab
             // 
+            this.productsTab.Controls.Add(this.txtStatusPrice);
+            this.productsTab.Controls.Add(this.txtStatusArt);
+            this.productsTab.Controls.Add(this.cmbStatusType);
+            this.productsTab.Controls.Add(this.labelStatusPrice);
+            this.productsTab.Controls.Add(this.labelStatusArt);
+            this.productsTab.Controls.Add(this.labelStatusType);
             this.productsTab.Controls.Add(this.btnDelStatus);
             this.productsTab.Controls.Add(this.btnEditStatus);
             this.productsTab.Controls.Add(this.btnAddStatus);
@@ -483,6 +504,58 @@ namespace MasterFloorDB
             this.productsTab.TabIndex = 3;
             this.productsTab.Text = "Продукты";
             this.productsTab.UseVisualStyleBackColor = true;
+            // 
+            // txtStatusPrice
+            // 
+            this.txtStatusPrice.Location = new System.Drawing.Point(107, 197);
+            this.txtStatusPrice.Name = "txtStatusPrice";
+            this.txtStatusPrice.Size = new System.Drawing.Size(240, 20);
+            this.txtStatusPrice.TabIndex = 89;
+            this.txtStatusPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress_1);
+            // 
+            // txtStatusArt
+            // 
+            this.txtStatusArt.Location = new System.Drawing.Point(97, 165);
+            this.txtStatusArt.Name = "txtStatusArt";
+            this.txtStatusArt.Size = new System.Drawing.Size(250, 20);
+            this.txtStatusArt.TabIndex = 88;
+            this.txtStatusArt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress_1);
+            // 
+            // cmbStatusType
+            // 
+            this.cmbStatusType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStatusType.FormattingEnabled = true;
+            this.cmbStatusType.Location = new System.Drawing.Point(74, 132);
+            this.cmbStatusType.Name = "cmbStatusType";
+            this.cmbStatusType.Size = new System.Drawing.Size(272, 21);
+            this.cmbStatusType.TabIndex = 87;
+            // 
+            // labelStatusPrice
+            // 
+            this.labelStatusPrice.AutoSize = true;
+            this.labelStatusPrice.Location = new System.Drawing.Point(39, 205);
+            this.labelStatusPrice.Name = "labelStatusPrice";
+            this.labelStatusPrice.Size = new System.Drawing.Size(61, 13);
+            this.labelStatusPrice.TabIndex = 86;
+            this.labelStatusPrice.Text = "Мин. цена:";
+            // 
+            // labelStatusArt
+            // 
+            this.labelStatusArt.AutoSize = true;
+            this.labelStatusArt.Location = new System.Drawing.Point(39, 173);
+            this.labelStatusArt.Name = "labelStatusArt";
+            this.labelStatusArt.Size = new System.Drawing.Size(51, 13);
+            this.labelStatusArt.TabIndex = 85;
+            this.labelStatusArt.Text = "Артикул:";
+            // 
+            // labelStatusType
+            // 
+            this.labelStatusType.AutoSize = true;
+            this.labelStatusType.Location = new System.Drawing.Point(39, 140);
+            this.labelStatusType.Name = "labelStatusType";
+            this.labelStatusType.Size = new System.Drawing.Size(29, 13);
+            this.labelStatusType.TabIndex = 84;
+            this.labelStatusType.Text = "Тип:";
             // 
             // btnDelStatus
             // 
@@ -543,8 +616,7 @@ namespace MasterFloorDB
             this.funcsCmbStatus.FormattingEnabled = true;
             this.funcsCmbStatus.Items.AddRange(new object[] {
             "Добавить строку",
-            "Редактировать строку",
-            "Просмотр с фильтрами"});
+            "Редактировать строку"});
             this.funcsCmbStatus.Location = new System.Drawing.Point(6, 26);
             this.funcsCmbStatus.Name = "funcsCmbStatus";
             this.funcsCmbStatus.Size = new System.Drawing.Size(121, 21);
@@ -560,99 +632,6 @@ namespace MasterFloorDB
             this.funcsLabelStatus.TabIndex = 63;
             this.funcsLabelStatus.Tag = "base";
             this.funcsLabelStatus.Text = "Функции:";
-            // 
-            // raresTab
-            // 
-            this.raresTab.Controls.Add(this.btnDelRare);
-            this.raresTab.Controls.Add(this.btnEditRare);
-            this.raresTab.Controls.Add(this.btnAddRare);
-            this.raresTab.Controls.Add(this.txtRareName);
-            this.raresTab.Controls.Add(this.labelRareName);
-            this.raresTab.Controls.Add(this.funcsCmbRare);
-            this.raresTab.Controls.Add(this.funcsLabelRare);
-            this.raresTab.Location = new System.Drawing.Point(4, 22);
-            this.raresTab.Name = "raresTab";
-            this.raresTab.Size = new System.Drawing.Size(376, 542);
-            this.raresTab.TabIndex = 4;
-            this.raresTab.Text = "Редкости";
-            this.raresTab.UseVisualStyleBackColor = true;
-            // 
-            // btnDelRare
-            // 
-            this.btnDelRare.Location = new System.Drawing.Point(190, 431);
-            this.btnDelRare.Name = "btnDelRare";
-            this.btnDelRare.Size = new System.Drawing.Size(123, 34);
-            this.btnDelRare.TabIndex = 83;
-            this.btnDelRare.Tag = "EditLine";
-            this.btnDelRare.Text = "Удалить запись";
-            this.btnDelRare.UseVisualStyleBackColor = true;
-            this.btnDelRare.Visible = false;
-            this.btnDelRare.Click += new System.EventHandler(this.btnDelRare_Click);
-            // 
-            // btnEditRare
-            // 
-            this.btnEditRare.Location = new System.Drawing.Point(61, 431);
-            this.btnEditRare.Name = "btnEditRare";
-            this.btnEditRare.Size = new System.Drawing.Size(123, 34);
-            this.btnEditRare.TabIndex = 82;
-            this.btnEditRare.Tag = "EditLine";
-            this.btnEditRare.Text = "Изменить запись";
-            this.btnEditRare.UseVisualStyleBackColor = true;
-            this.btnEditRare.Visible = false;
-            this.btnEditRare.Click += new System.EventHandler(this.btnEditRare_Click);
-            // 
-            // btnAddRare
-            // 
-            this.btnAddRare.Location = new System.Drawing.Point(122, 471);
-            this.btnAddRare.Name = "btnAddRare";
-            this.btnAddRare.Size = new System.Drawing.Size(123, 34);
-            this.btnAddRare.TabIndex = 81;
-            this.btnAddRare.Tag = "CreateLine";
-            this.btnAddRare.Text = "Добавить запись";
-            this.btnAddRare.UseVisualStyleBackColor = true;
-            this.btnAddRare.Click += new System.EventHandler(this.btnAddRare_Click);
-            // 
-            // txtRareName
-            // 
-            this.txtRareName.Location = new System.Drawing.Point(102, 103);
-            this.txtRareName.Name = "txtRareName";
-            this.txtRareName.Size = new System.Drawing.Size(245, 20);
-            this.txtRareName.TabIndex = 66;
-            this.txtRareName.Tag = "CreateLine";
-            // 
-            // labelRareName
-            // 
-            this.labelRareName.AutoSize = true;
-            this.labelRareName.Location = new System.Drawing.Point(36, 106);
-            this.labelRareName.Name = "labelRareName";
-            this.labelRareName.Size = new System.Drawing.Size(60, 13);
-            this.labelRareName.TabIndex = 65;
-            this.labelRareName.Tag = "CreateLine";
-            this.labelRareName.Text = "Название:";
-            // 
-            // funcsCmbRare
-            // 
-            this.funcsCmbRare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.funcsCmbRare.FormattingEnabled = true;
-            this.funcsCmbRare.Items.AddRange(new object[] {
-            "Добавить строку",
-            "Редактировать строку",
-            "Просмотр с фильтрами"});
-            this.funcsCmbRare.Location = new System.Drawing.Point(6, 26);
-            this.funcsCmbRare.Name = "funcsCmbRare";
-            this.funcsCmbRare.Size = new System.Drawing.Size(121, 21);
-            this.funcsCmbRare.TabIndex = 64;
-            this.funcsCmbRare.Tag = "base";
-            // 
-            // funcsLabelRare
-            // 
-            this.funcsLabelRare.AutoSize = true;
-            this.funcsLabelRare.Location = new System.Drawing.Point(3, 9);
-            this.funcsLabelRare.Name = "funcsLabelRare";
-            this.funcsLabelRare.Size = new System.Drawing.Size(56, 13);
-            this.funcsLabelRare.TabIndex = 63;
-            this.funcsLabelRare.Tag = "base";
-            this.funcsLabelRare.Text = "Функции:";
             // 
             // tableLayoutPanel1
             // 
@@ -699,8 +678,6 @@ namespace MasterFloorDB
             this.materialsTab.PerformLayout();
             this.productsTab.ResumeLayout(false);
             this.productsTab.PerformLayout();
-            this.raresTab.ResumeLayout(false);
-            this.raresTab.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -726,9 +703,9 @@ namespace MasterFloorDB
         private ComboBox funcsCmbMain;
         private Label funcsLabelMain;
         private TabPage typesTab;
-        private Button btnDelColls;
-        private Button btnEditColls;
-        private Button btnAddColls;
+        private Button btnDelTypes;
+        private Button btnEditTypes;
+        private Button btnAddTypes;
         private TextBox txtCollsName;
         private Label labelCollsName;
         private ComboBox funcsCmbColls;
@@ -749,16 +726,16 @@ namespace MasterFloorDB
         private Label labelStatusName;
         private ComboBox funcsCmbStatus;
         private Label funcsLabelStatus;
-        private TabPage raresTab;
-        private Button btnDelRare;
-        private Button btnEditRare;
-        private Button btnAddRare;
-        private TextBox txtRareName;
-        private Label labelRareName;
-        private ComboBox funcsCmbRare;
-        private Label funcsLabelRare;
         private TableLayoutPanel tableLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Label labelCondDef;
+        private TextBox txtCondDef;
+        private Label labelStatusPrice;
+        private Label labelStatusArt;
+        private Label labelStatusType;
+        private TextBox txtStatusPrice;
+        private TextBox txtStatusArt;
+        private ComboBox cmbStatusType;
     }
 }
 

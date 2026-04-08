@@ -36,11 +36,11 @@ namespace MasterFloorDB.Entities
 	            ""Id""	INTEGER NOT NULL,
 	            ""Name""	TEXT NOT NULL,
 	            ""TypeId""	INTEGER NOT NULL,
-	            ""Address""	TEXT NOT NULL,
-	            ""TIN""	INTEGER NOT NULL,
+	            ""Address""	TEXT,
+	            ""TIN""	INTEGER,
 	            ""DirectorsName""	TEXT NOT NULL,
 	            ""Phone""	TEXT NOT NULL,
-	            ""Email""	TEXT NOT NULL,
+	            ""Email""	TEXT,
 	            ""Rating""	INTEGER NOT NULL,
 	            PRIMARY KEY(""Id"" AUTOINCREMENT)
                 FOREIGN KEY (TypeId) REFERENCES Product_type(Id)
@@ -61,6 +61,8 @@ namespace MasterFloorDB.Entities
                 	""Ratio""	REAL,
                 	PRIMARY KEY(""Id"" AUTOINCREMENT)
                 );
+                insert or ignore into Product_type (Type, Ratio) values 
+                (""Ламинат"", 2.35), (""Массивная доска"", 5.15), (""Паркетная доска"", 4.34), (""Пробковое покрытие"", 1.5);
 
 
                 CREATE TABLE if not exists ""PartnerProduct"" (
@@ -88,11 +90,12 @@ namespace MasterFloorDB.Entities
 
                 CREATE TABLE if not exists ""Products"" (
                 	""Id""	INTEGER,
+                	""TypeId""	INTEGER,
                 	""Name""	TEXT,
-                	""Type""	TEXT,
                 	""Art""	INTEGER,
                 	""MinPrice""	REAL,
-                	PRIMARY KEY(""Id"" AUTOINCREMENT)
+                	PRIMARY KEY(""Id"" AUTOINCREMENT),
+                    FOREIGN KEY(""TypeId"") REFERENCES ""Product_type""(""Id"")
                 );
 
 
@@ -105,7 +108,19 @@ namespace MasterFloorDB.Entities
                 i.Phone as ""Телефон"",
                 i.Rating as ""Рейтинг""
                 from Partners i
-                left join partner_type t on t.Id = i.TypeId";
+                left join partner_type t on t.Id = i.TypeId;
+
+
+                CREATE VIEW if not exists ProductsView as
+                select 
+                p.Id,
+                pt.Type as ""Тип"",
+                p.name as ""Наименование"",
+                p.Art as ""Артикул"",
+                p.MinPrice as ""Мин. цена""
+                
+                FROM Products p
+                join Product_type pt on pt.Id = p.TypeId";
 
                 
                 SQLiteCommand cmd = new SQLiteCommand(sqlItems, conn);
@@ -134,6 +149,7 @@ namespace MasterFloorDB.Entities
                         {
                             //Type = new SQLiteCommand($"select Name from Types where Id = {int.Parse(reader.GetString(1))}", conn)
                             //.ExecuteReader().GetString(0),
+                            Id = reader.GetInt32(0),
                             Type = new Types() { Name = reader.GetString(1) },
                             Name = reader.GetString(2),
                             Director = reader.GetString(3),
@@ -171,6 +187,33 @@ namespace MasterFloorDB.Entities
                     return types;
             }
         }
+
+        public static List<ProdTypes> GetProdTypesList()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                List<ProdTypes> prodTypes = new List<ProdTypes>();
+
+                var cmd = new SQLiteCommand("Select * from product_type", conn);
+                using (cmd)
+                {
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        prodTypes.Add(new ProdTypes()
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1)
+                        });
+                    }
+                }
+                return prodTypes;
+            }
+        }
+
+
         public static DataTable GetData(string data)
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
@@ -198,13 +241,14 @@ namespace MasterFloorDB.Entities
                     TypeId = @typeId,
                     DirectorsName = @director,
                     Phone = @phone,
-                    Rating = @rating,
+                    Rating = @rating
                     where id = @id
                     ";
                 var cmd = new SQLiteCommand(com, conn);
 
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@typeId", typeId);
+                cmd.Parameters.AddWithValue("@director", director);
                 cmd.Parameters.AddWithValue("@phone", phone);
                 cmd.Parameters.AddWithValue("@rating", rating);
 
@@ -242,6 +286,26 @@ namespace MasterFloorDB.Entities
                 return true;
             }
         }
+
+        public static bool UpdateMats(string name, decimal percent, int Id)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                if (name == null || name == "")
+                {
+                    MessageBox.Show("Пожалуйста, заполните столбец");
+                    return false;
+                }
+
+                var cmd = new SQLiteCommand($@"update Material_type set Type = ""{name}"", DefectPerc = @percent  where Id = {Id}", conn);
+                cmd.Parameters.AddWithValue("@percent", percent);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+        }
+
 
         public static void DeleteData(string table, int Id)
         {
@@ -313,7 +377,10 @@ namespace MasterFloorDB.Entities
                     products.Add(new Products() 
                     { 
                         Id = reader.GetInt32(0), 
-                        Name = reader.GetString(1)
+                        TypeId = reader.GetInt32(1),
+                        Name = reader.GetString(2),
+                        Art = reader.GetInt32(3),
+                        MinPrice = reader.GetDecimal(4)
                     });
                 }
                 return products;
@@ -371,9 +438,64 @@ namespace MasterFloorDB.Entities
 
                 var cmd = new SQLiteCommand($@"insert into {table}(Name) values(""{name}"")", connection);
                 cmd.ExecuteNonQuery();
+                return true;
             }
-            return true;
         }
+
+        public static bool AddMatsInBase(string name, decimal percent)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                if (name == null || name == "")
+                {
+                    MessageBox.Show("Пожалуйста, заполните столбец");
+                    return false;
+                }
+
+                var cmd = new SQLiteCommand($@"insert into Material_type(Type, DefectPerc) values(""{name}"", @percent)", connection);
+                cmd.Parameters.AddWithValue("@percent", percent);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+        }
+
+        public static bool AddProductsInBase(Products product)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                //if (name == null || name == "")
+                //{
+                //    MessageBox.Show("Пожалуйста, заполните столбец");
+                //    return false;
+                //}
+
+
+                var cmd = new SQLiteCommand($@"
+                insert into Products(Name, TypeId, Art, MinPrice)
+                values(@name, @type, @art, @price)", connection);
+                cmd.Parameters.AddWithValue("@name", product.Name);
+                cmd.Parameters.AddWithValue("@type", product.TypeId);
+                cmd.Parameters.AddWithValue("@art", product.Art);
+                cmd.Parameters.AddWithValue("@price", product.MinPrice);
+
+                foreach (SQLiteParameter par in cmd.Parameters)
+                {
+                    if (par == null || par.Value.ToString() == "")
+                    {
+                        MessageBox.Show("Заполнены не все столбцы");
+                        return false;
+                    }
+                }
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+        }
+
 
 
 

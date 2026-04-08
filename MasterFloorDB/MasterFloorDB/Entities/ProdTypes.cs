@@ -6,18 +6,11 @@ using System.Threading.Tasks;
 
 namespace MasterFloorDB.Entities
 {
-    public class Products
+    public class ProdTypes
     {
         public int Id { get; set; }
 
-        public int TypeId {  get; set; }
-
         public string Name { get; set; }
-
-        public int? Art {  get; set; }
-
-        public decimal MinPrice { get; set; }
-
 
     }
 }

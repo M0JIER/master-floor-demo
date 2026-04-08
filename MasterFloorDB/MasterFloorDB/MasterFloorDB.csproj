@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBFuncs.cs" />
+    <Compile Include="Entities\ProdTypes.cs" />
     <Compile Include="Entities\Types.cs" />
     <Compile Include="Entities\Conditions.cs" />
     <Compile Include="Entities\Items.cs" />

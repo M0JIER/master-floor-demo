@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\dbfuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\dbfuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\entities\\items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\entities\\items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|h:\\project\\coding\\master floor demo\\masterfloordb\\masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\entities\\prodtypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\entities\\prodtypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|h:\\project\\coding\\master floor demo\\masterfloordb\\masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\entities\\types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\entities\\types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\entities\\items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\entities\\items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\dbfuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\dbfuncs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\entities\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\entities\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
-      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+      "AbsoluteMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{02149B80-E137-442F-9BE2-0AFF3AB6DE4F}|MasterFloorDB\\MasterFloorDB.csproj|solutionrelative:masterfloordb\\reqitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -95,25 +103,24 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DBFuncs.cs",
-              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\DBFuncs.cs",
-              "RelativeDocumentMoniker": "MasterFloorDB\\DBFuncs.cs",
-              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\DBFuncs.cs",
-              "RelativeToolTip": "MasterFloorDB\\DBFuncs.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAA9wCgAAAAtAAAAAAAAAA==",
+              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs",
+              "RelativeDocumentMoniker": "MasterFloorDB\\Form1.cs",
+              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "MasterFloorDB\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T15:38:48.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-01T14:30:54.737Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "ReqItem.cs",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\ReqItem.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\ReqItem.cs",
               "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\ReqItem.cs",
               "RelativeToolTip": "MasterFloorDB\\ReqItem.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAhwBYAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAjwDUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T15:18:32.18Z",
               "EditorCaption": ""
@@ -121,30 +128,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "DBFuncs.cs",
+              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\DBFuncs.cs",
+              "RelativeDocumentMoniker": "MasterFloorDB\\DBFuncs.cs",
+              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\DBFuncs.cs",
+              "RelativeToolTip": "MasterFloorDB\\DBFuncs.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAAEAAAAB9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T15:38:48.773Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "ReqItem.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\ReqItem.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\ReqItem.cs",
               "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\ReqItem.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "MasterFloorDB\\ReqItem.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T15:18:29.335Z"
+              "WhenOpened": "2026-04-01T15:18:29.335Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\Form1.Designer.cs",
               "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.Designer.cs",
               "RelativeToolTip": "MasterFloorDB\\Form1.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T15:15:04.895Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Form1.resx",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.resx",
               "RelativeDocumentMoniker": "MasterFloorDB\\Form1.resx",
@@ -156,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Types.cs",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\Types.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\Entities\\Types.cs",
@@ -164,11 +185,12 @@
               "RelativeToolTip": "MasterFloorDB\\Entities\\Types.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-03T18:26:48.569Z"
+              "WhenOpened": "2026-04-03T18:26:48.569Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Items.cs",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\Items.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\Entities\\Items.cs",
@@ -181,28 +203,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs",
               "RelativeDocumentMoniker": "MasterFloorDB\\Form1.cs",
               "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs",
               "RelativeToolTip": "MasterFloorDB\\Form1.cs",
-              "ViewState": "AgIAALQBAAAAAAAAAAAUwMkBAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAHoAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-31T14:39:27.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs",
-              "RelativeDocumentMoniker": "MasterFloorDB\\Form1.cs",
-              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "MasterFloorDB\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentIndex": 8,
+              "Title": "Products.cs",
+              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\Products.cs",
+              "RelativeDocumentMoniker": "MasterFloorDB\\Entities\\Products.cs",
+              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\Products.cs",
+              "RelativeToolTip": "MasterFloorDB\\Entities\\Products.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T14:30:54.737Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "WhenOpened": "2026-04-07T11:01:08.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProdTypes.cs",
+              "DocumentMoniker": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\ProdTypes.cs",
+              "RelativeDocumentMoniker": "MasterFloorDB\\Entities\\ProdTypes.cs",
+              "ToolTip": "H:\\Project\\Coding\\Master floor demo\\MasterFloorDB\\MasterFloorDB\\Entities\\ProdTypes.cs",
+              "RelativeToolTip": "MasterFloorDB\\Entities\\ProdTypes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T11:05:38.414Z",
+              "EditorCaption": ""
             }
           ]
         }
